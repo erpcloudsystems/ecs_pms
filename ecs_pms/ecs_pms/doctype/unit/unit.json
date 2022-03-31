@@ -1,0 +1,161 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:name1",
+ "creation": "2022-03-28 14:22:54.727770",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "unit_information_section",
+  "name1",
+  "type",
+  "floor",
+  "zone",
+  "area",
+  "column_break_8",
+  "activity",
+  "allocation",
+  "internal_space",
+  "external_space",
+  "state",
+  "status",
+  "unit_notes_section",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "unit_information_section",
+   "fieldtype": "Section Break",
+   "label": "Unit Information"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Type",
+   "options": "Unit Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "floor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Floor",
+   "options": "Floor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "zone",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Zone",
+   "options": "Zone",
+   "reqd": 1
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Area",
+   "options": "Area",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "activity",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Activity",
+   "options": "PMS Activity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "allocation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Allocation",
+   "options": "\nPrime\nMedium\nLow",
+   "reqd": 1
+  },
+  {
+   "fieldname": "internal_space",
+   "fieldtype": "Float",
+   "label": "Internal Space"
+  },
+  {
+   "fieldname": "external_space",
+   "fieldtype": "Float",
+   "label": "External Space"
+  },
+  {
+   "fieldname": "unit_notes_section",
+   "fieldtype": "Section Break",
+   "label": "Unit Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nVacant\nOccupied",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nFurnished\nCore & Shell",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-28 16:16:27.275370",
+ "modified_by": "Administrator",
+ "module": "ECS PMS",
+ "name": "Unit",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "name1, type, floor, zone, activity",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "name1",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

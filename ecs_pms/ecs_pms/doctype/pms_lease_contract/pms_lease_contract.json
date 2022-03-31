@@ -1,0 +1,467 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2022-03-29 11:25:59.611625",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "posting_date",
+  "is_signed",
+  "cb_party",
+  "amended_from",
+  "party",
+  "party_name",
+  "sb_signee",
+  "signee",
+  "signed_on",
+  "cb_user",
+  "signee_company",
+  "signed_by_company",
+  "sb_terms",
+  "contract_period",
+  "no_of_years",
+  "no_of_months",
+  "cb_date",
+  "start_date",
+  "end_date",
+  "lease_unit_details",
+  "unit",
+  "name1",
+  "type",
+  "floor",
+  "zone",
+  "area",
+  "column_break_8",
+  "activity",
+  "allocation",
+  "internal_space",
+  "external_space",
+  "state",
+  "unit_status",
+  "accounting_details_section",
+  "rent_value_",
+  "meter_price",
+  "annual_increase",
+  "annual_increase_type",
+  "with_insurance",
+  "insurance_value",
+  "column_break_25",
+  "insurance_account",
+  "cash_account",
+  "rental_expense_account",
+  "cost_center",
+  "sb_contract",
+  "contract_terms",
+  "repayment_schedule_section",
+  "contract_repayment_schedule",
+  "total_payable_amount",
+  "total_amount_paid",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "CONT-.YYYY.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "CONT-.YYYY.-",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "is_signed",
+   "fieldtype": "Check",
+   "label": "Signed"
+  },
+  {
+   "fieldname": "cb_party",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Lease Contract",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "party.customer_name",
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.is_signed==1",
+   "fieldname": "sb_signee",
+   "fieldtype": "Section Break",
+   "label": "Signee Details"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "signee",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Signee"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "signed_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Signed On"
+  },
+  {
+   "fieldname": "cb_user",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "signee_company",
+   "fieldtype": "Signature",
+   "label": "Signee (Company)"
+  },
+  {
+   "fieldname": "signed_by_company",
+   "fieldtype": "Link",
+   "label": "Signed By (Company)",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_terms",
+   "fieldtype": "Section Break",
+   "label": "Contract Period"
+  },
+  {
+   "fieldname": "contract_period",
+   "fieldtype": "Select",
+   "label": "Contract Period UOM (Months / Years)",
+   "options": "\nMonths\nYears",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.contract_period == \"Years\"",
+   "fieldname": "no_of_years",
+   "fieldtype": "Int",
+   "label": "No Of Years",
+   "mandatory_depends_on": "eval:doc.contract_period == \"Years\""
+  },
+  {
+   "depends_on": "eval:doc.contract_period",
+   "fieldname": "no_of_months",
+   "fieldtype": "Int",
+   "label": "No Of Months",
+   "mandatory_depends_on": "eval:doc.contract_period == \"Months\"",
+   "read_only_depends_on": "eval:doc.contract_period == \"Years\""
+  },
+  {
+   "fieldname": "cb_date",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "lease_unit_details",
+   "fieldtype": "Section Break",
+   "label": "Lease Unit Details"
+  },
+  {
+   "fieldname": "rent_value_",
+   "fieldtype": "Currency",
+   "label": "Rent Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "annual_increase",
+   "fieldtype": "Percent",
+   "label": "Annual Increase (%)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "annual_increase_type",
+   "fieldtype": "Select",
+   "label": "Annual Increase Type",
+   "options": "\nFixed Rate\nAccumulated Rate",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "with_insurance",
+   "fieldtype": "Check",
+   "label": "With Insurance"
+  },
+  {
+   "depends_on": "eval:doc.with_insurance",
+   "fieldname": "insurance_value",
+   "fieldtype": "Currency",
+   "label": "Insurance Amount",
+   "mandatory_depends_on": "eval:doc.with_insurance"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.with_insurance",
+   "fieldname": "insurance_account",
+   "fieldtype": "Link",
+   "label": "Insurance Account",
+   "mandatory_depends_on": "eval:doc.with_insurance",
+   "options": "Account"
+  },
+  {
+   "fieldname": "cash_account",
+   "fieldtype": "Link",
+   "label": "Cash Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "rental_expense_account",
+   "fieldtype": "Link",
+   "label": "Rental Expense Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.docstatus==0",
+   "fieldname": "sb_contract",
+   "fieldtype": "Section Break",
+   "label": "Contract Details"
+  },
+  {
+   "fieldname": "contract_terms",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Contract Terms",
+   "reqd": 1
+  },
+  {
+   "fieldname": "repayment_schedule_section",
+   "fieldtype": "Section Break",
+   "label": "Repayment Schedule"
+  },
+  {
+   "fieldname": "contract_repayment_schedule",
+   "fieldtype": "Table",
+   "label": "Contract Repayment Schedule",
+   "no_copy": 1,
+   "options": "PMS Repayment Schedule"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "total_payable_amount",
+   "fieldtype": "Currency",
+   "label": "Total Payable Amount",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "total_amount_paid",
+   "fieldtype": "Currency",
+   "label": "Total Amount Paid",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Lease Contract",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Unit",
+   "options": "Unit",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "unit.name1",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.type",
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "label": "Type",
+   "options": "Unit Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.floor",
+   "fieldname": "floor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Floor",
+   "options": "Floor",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.zone",
+   "fieldname": "zone",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Zone",
+   "options": "Zone",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.area",
+   "fieldname": "area",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Area",
+   "options": "Area",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "unit.activity",
+   "fieldname": "activity",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Activity",
+   "options": "PMS Activity",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.allocation",
+   "fieldname": "allocation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Allocation",
+   "options": "\nPrime\nMedium\nLow",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.internal_space",
+   "fieldname": "internal_space",
+   "fieldtype": "Float",
+   "label": "Internal Space",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.external_space",
+   "fieldname": "external_space",
+   "fieldtype": "Float",
+   "label": "External Space",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.state",
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nFurnished\nCore & Shell",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.status",
+   "fieldname": "unit_status",
+   "fieldtype": "Select",
+   "label": "Unit Status",
+   "options": "\nVacant\nOccupied",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accounting_details_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Details"
+  },
+  {
+   "fieldname": "meter_price",
+   "fieldtype": "Currency",
+   "label": "Meter Price",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "reference_link"
+  }
+ ],
+ "modified": "2022-03-30 10:21:41.972766",
+ "modified_by": "Administrator",
+ "module": "ECS PMS",
+ "name": "PMS Lease Contract",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "party_name",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

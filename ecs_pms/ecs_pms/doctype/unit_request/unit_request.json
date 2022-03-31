@@ -1,0 +1,260 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2022-03-28 15:54:39.831780",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "customer_information_section",
+  "customer",
+  "customer_name",
+  "customer_group",
+  "column_break_7",
+  "date",
+  "status",
+  "unit_information_section",
+  "unit",
+  "name1",
+  "type",
+  "floor",
+  "zone",
+  "area",
+  "column_break_8",
+  "activity",
+  "allocation",
+  "internal_space",
+  "external_space",
+  "state",
+  "unit_status",
+  "request_notes_section",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "REQ-"
+  },
+  {
+   "fieldname": "customer_information_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Information"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.customer_group",
+   "fieldname": "customer_group",
+   "fieldtype": "Link",
+   "label": "Customer Group",
+   "options": "Customer Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Request Status",
+   "options": "Open\nQuotation\nClosed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "unit_information_section",
+   "fieldtype": "Section Break",
+   "label": "Unit Information"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Unit",
+   "options": "Unit",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "unit.name1",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.type",
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "label": "Type",
+   "options": "Unit Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.floor",
+   "fieldname": "floor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Floor",
+   "options": "Floor",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.zone",
+   "fieldname": "zone",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Zone",
+   "options": "Zone",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.area",
+   "fieldname": "area",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Area",
+   "options": "Area",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "unit.activity",
+   "fieldname": "activity",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Activity",
+   "options": "PMS Activity",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.allocation",
+   "fieldname": "allocation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Allocation",
+   "options": "\nPrime\nMedium\nLow",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.internal_space",
+   "fieldname": "internal_space",
+   "fieldtype": "Float",
+   "label": "Internal Space",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.external_space",
+   "fieldname": "external_space",
+   "fieldtype": "Float",
+   "label": "External Space",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.state",
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nFurnished\nCore & Shell",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "unit.status",
+   "fieldname": "unit_status",
+   "fieldtype": "Select",
+   "label": "Unit Status",
+   "options": "\nVacant\nOccupied",
+   "read_only": 1
+  },
+  {
+   "fieldname": "request_notes_section",
+   "fieldtype": "Section Break",
+   "label": "Request Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Unit Request",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Quotation",
+   "link_fieldname": "unit_request"
+  }
+ ],
+ "modified": "2022-03-28 16:46:29.497071",
+ "modified_by": "Administrator",
+ "module": "ECS PMS",
+ "name": "Unit Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
