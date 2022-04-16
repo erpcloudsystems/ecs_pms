@@ -164,7 +164,7 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "Units Report",
    "link_to": "Units Report",
    "link_type": "Report",
@@ -173,7 +173,7 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "Lease Contracts Report",
    "link_to": "Lease Contract Report",
    "link_type": "Report",
@@ -182,7 +182,7 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "Detailed Lease Contracts Payments Report",
    "link_to": "Detailed Lease Contract Payments Report",
    "link_type": "Report",
@@ -190,7 +190,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-04-16 12:41:47.084623",
+ "modified": "2022-04-16 16:08:07.058073",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "Property Management",

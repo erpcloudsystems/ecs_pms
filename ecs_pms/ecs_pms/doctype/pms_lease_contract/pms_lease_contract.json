@@ -1,5 +1,7 @@
 {
  "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2022-03-29 11:25:59.611625",
  "doctype": "DocType",
@@ -57,8 +59,7 @@
   "repayment_schedule_section",
   "contract_repayment_schedule",
   "total_payable_amount",
-  "total_amount_paid",
-  "amended_from"
+  "total_amount_paid"
  ],
  "fields": [
   {
@@ -93,7 +94,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Lease Contract",
+   "options": "PMS Lease Contract",
    "print_hide": 1,
    "read_only": 1
   },
@@ -305,7 +306,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Lease Contract",
+   "options": "PMS Lease Contract",
    "print_hide": 1,
    "read_only": 1
   },
@@ -437,7 +438,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-03-30 10:21:41.972766",
+ "modified": "2022-04-16 16:02:26.610107",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
