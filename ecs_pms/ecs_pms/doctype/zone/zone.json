@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:zone",
  "creation": "2022-03-28 14:32:08.484809",
@@ -23,7 +24,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-28 14:32:08.484809",
+ "modified": "2022-06-05 10:34:54.578927",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "Zone",

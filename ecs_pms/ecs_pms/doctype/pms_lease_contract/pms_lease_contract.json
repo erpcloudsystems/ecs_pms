@@ -8,13 +8,19 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "water_section",
+  "base_water_amount",
+  "column_break_2",
+  "create_water_journal",
+  "section_break_2",
   "naming_series",
-  "posting_date",
-  "is_signed",
-  "cb_party",
-  "amended_from",
   "party",
   "party_name",
+  "customer_group",
+  "cb_party",
+  "posting_date",
+  "is_signed",
+  "amended_from",
   "sb_signee",
   "signee",
   "signed_on",
@@ -25,9 +31,13 @@
   "contract_period",
   "no_of_years",
   "no_of_months",
+  "no_of_days",
   "cb_date",
+  "grace_period",
   "start_date",
   "end_date",
+  "sb_contract",
+  "contract_terms",
   "lease_unit_details",
   "unit",
   "name1",
@@ -35,6 +45,7 @@
   "floor",
   "zone",
   "area",
+  "phase",
   "column_break_8",
   "activity",
   "allocation",
@@ -42,24 +53,77 @@
   "external_space",
   "state",
   "unit_status",
+  "contract_currency_section",
+  "currency",
+  "column_break_40",
+  "conversion_rate",
   "accounting_details_section",
+  "revenue_type",
+  "sales_percentage",
+  "minimum_rent",
+  "base_minimum_rent",
   "rent_value_",
+  "base_rent_value",
   "meter_price",
+  "base_meter_price",
+  "column_break_39",
   "annual_increase",
   "annual_increase_type",
+  "invoice_periodicity",
+  "cost_center",
+  "insurance_and_advanced_payment_section",
   "with_insurance",
   "insurance_value",
-  "column_break_25",
-  "insurance_account",
-  "cash_account",
-  "rental_expense_account",
-  "cost_center",
-  "sb_contract",
-  "contract_terms",
+  "base_insurance_value",
+  "insurance_payment",
+  "insurance_pe",
+  "insurance_paid",
+  "column_break_63",
+  "with_advanced_payment",
+  "advanced_amount",
+  "base_advanced_amount",
+  "advanced_payment",
+  "advanced_pe",
+  "advanced_paid",
+  "services_and_utilities_section",
+  "marketing_service",
+  "marketing_based_on",
+  "marketing_percent",
+  "marketing_amount",
+  "base_marketing_amount",
+  "marketing_increase_percent",
+  "marketing_increase_type",
+  "column_break_68",
+  "maintenance_service",
+  "maintenance_based_on",
+  "maintenance_percent",
+  "maintenance_amount",
+  "base_maintenance_amount",
+  "maintenance_increase_percent",
+  "maintenance_increase_type",
+  "column_break_70",
+  "electricity",
+  "electricity_based_on",
+  "electricity_percent",
+  "electricity_amount",
+  "base_electricity_amount",
   "repayment_schedule_section",
   "contract_repayment_schedule",
+  "section_break_59",
   "total_payable_amount",
-  "total_amount_paid"
+  "base_total_payable_amount",
+  "column_break_62",
+  "total_invoiced_amount",
+  "base_total_invoiced_amount",
+  "column_break_109",
+  "total_amount_paid",
+  "base_total_amount_paid",
+  "contract_defaults_section",
+  "lease_item",
+  "default_mode_of_payment",
+  "mode_of_payment_account",
+  "income_account",
+  "electricity_expense_account"
  ],
  "fields": [
   {
@@ -150,6 +214,7 @@
    "read_only": 1
   },
   {
+   "collapsible": 1,
    "fieldname": "sb_terms",
    "fieldtype": "Section Break",
    "label": "Contract Period"
@@ -157,8 +222,8 @@
   {
    "fieldname": "contract_period",
    "fieldtype": "Select",
-   "label": "Contract Period UOM (Months / Years)",
-   "options": "\nMonths\nYears",
+   "label": "Contract Period UOM (Days / Months / Years)",
+   "options": "\nDays\nMonths\nYears",
    "reqd": 1
   },
   {
@@ -193,34 +258,38 @@
    "read_only": 1
   },
   {
+   "collapsible": 1,
    "fieldname": "lease_unit_details",
    "fieldtype": "Section Break",
    "label": "Lease Unit Details"
   },
   {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "rent_value_",
    "fieldtype": "Currency",
    "label": "Rent Amount",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.revenue_type == \"Fixed Lease\""
   },
   {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "annual_increase",
    "fieldtype": "Percent",
    "label": "Annual Increase (%)",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.revenue_type == \"Fixed Lease\""
   },
   {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "annual_increase_type",
    "fieldtype": "Select",
    "label": "Annual Increase Type",
-   "options": "\nFixed Rate\nAccumulated Rate",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
+   "options": "\nFixed Rate\nAccumulated Rate"
   },
   {
    "default": "0",
    "fieldname": "with_insurance",
    "fieldtype": "Check",
-   "label": "With Insurance"
+   "label": "Insurance"
   },
   {
    "depends_on": "eval:doc.with_insurance",
@@ -230,38 +299,15 @@
    "mandatory_depends_on": "eval:doc.with_insurance"
   },
   {
-   "fieldname": "column_break_25",
-   "fieldtype": "Column Break"
-  },
-  {
-   "depends_on": "eval:doc.with_insurance",
-   "fieldname": "insurance_account",
-   "fieldtype": "Link",
-   "label": "Insurance Account",
-   "mandatory_depends_on": "eval:doc.with_insurance",
-   "options": "Account"
-  },
-  {
-   "fieldname": "cash_account",
-   "fieldtype": "Link",
-   "label": "Cash Account",
-   "options": "Account"
-  },
-  {
-   "fieldname": "rental_expense_account",
-   "fieldtype": "Link",
-   "label": "Rental Expense Account",
-   "options": "Account"
-  },
-  {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "cost_center",
    "fieldtype": "Link",
    "label": "Cost Center",
-   "options": "Cost Center"
+   "options": "Cost Center",
+   "reqd": 1
   },
   {
    "collapsible": 1,
-   "collapsible_depends_on": "eval:doc.docstatus==0",
    "fieldname": "sb_contract",
    "fieldtype": "Section Break",
    "label": "Contract Details"
@@ -274,6 +320,8 @@
    "reqd": 1
   },
   {
+   "collapsible": 1,
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "repayment_schedule_section",
    "fieldtype": "Section Break",
    "label": "Repayment Schedule"
@@ -419,26 +467,500 @@
    "read_only": 1
   },
   {
+   "collapsible": 1,
    "fieldname": "accounting_details_section",
    "fieldtype": "Section Break",
    "label": "Accounting Details"
   },
   {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "meter_price",
    "fieldtype": "Currency",
    "label": "Meter Price",
    "read_only": 1
+  },
+  {
+   "fieldname": "invoice_periodicity",
+   "fieldtype": "Select",
+   "label": "Invoice Periodicity",
+   "options": "\nMonthly\nQuarterly\nSemi Annually\nAnnually",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "unit.phase",
+   "fieldname": "phase",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Phase",
+   "options": "Phase",
+   "read_only": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "conversion_rate",
+   "fieldtype": "Float",
+   "label": "Exchange Rate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
+   "fieldname": "base_rent_value",
+   "fieldtype": "Currency",
+   "label": "Rent Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
+   "fieldname": "base_meter_price",
+   "fieldtype": "Currency",
+   "label": "Meter Price (EGP)",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.with_insurance",
+   "fieldname": "base_insurance_value",
+   "fieldtype": "Currency",
+   "label": "Insurance Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "base_total_payable_amount",
+   "fieldtype": "Currency",
+   "label": "Total Payable Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "base_total_amount_paid",
+   "fieldtype": "Currency",
+   "label": "Total Amount Paid (EGP)",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_59",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "column_break_62",
+   "fieldtype": "Column Break"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "contract_currency_section",
+   "fieldtype": "Section Break",
+   "label": "Contract Currency"
+  },
+  {
+   "fieldname": "column_break_40",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "revenue_type",
+   "fieldtype": "Select",
+   "label": "Contract Type",
+   "options": "\nFixed Lease\nRevenue Share\nRevenue Share + Fixed Rent\nRevenue Share / Minimum Rent\nPromotions",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share\" || doc.revenue_type == \"Revenue Share + Minimum Rent\"",
+   "fieldname": "sales_percentage",
+   "fieldtype": "Percent",
+   "label": "Sales Percentage (%)",
+   "mandatory_depends_on": "eval:doc.revenue_type == \"Revenue Share\" || doc.revenue_type == \"Revenue Share + Minimum Rent\""
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share + Minimum Rent\"",
+   "fieldname": "minimum_rent",
+   "fieldtype": "Currency",
+   "label": "Minimum Rent",
+   "mandatory_depends_on": "eval:doc.revenue_type == \"Revenue Share + Minimum Rent\""
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share + Minimum Rent\"",
+   "fieldname": "base_minimum_rent",
+   "fieldtype": "Currency",
+   "label": "Minimum Rent (EGP)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "party.customer_group",
+   "fieldname": "customer_group",
+   "fieldtype": "Link",
+   "label": "Customer Group",
+   "options": "Customer Group",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.contract_period == \"Days\"",
+   "fieldname": "no_of_days",
+   "fieldtype": "Int",
+   "label": "No Of Days",
+   "mandatory_depends_on": "eval:doc.contract_period == \"Days\""
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "insurance_and_advanced_payment_section",
+   "fieldtype": "Section Break",
+   "label": "Insurance & Advanced Payment"
+  },
+  {
+   "fieldname": "column_break_63",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.with_advanced_payment && doc.docstatus == 1 && doc.advanced_paid == 0",
+   "fieldname": "advanced_payment",
+   "fieldtype": "Button",
+   "label": "<b>Advanced Payment</b>"
+  },
+  {
+   "depends_on": "eval:doc.with_advanced_payment",
+   "fieldname": "advanced_amount",
+   "fieldtype": "Currency",
+   "label": "Advanced Payment Amount",
+   "mandatory_depends_on": "eval:doc.advanced_payment"
+  },
+  {
+   "depends_on": "eval:doc.with_advanced_payment",
+   "fieldname": "base_advanced_amount",
+   "fieldtype": "Currency",
+   "label": "Advanced Payment Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "services_and_utilities_section",
+   "fieldtype": "Section Break",
+   "label": "Services & Utilities"
+  },
+  {
+   "default": "0",
+   "fieldname": "marketing_service",
+   "fieldtype": "Check",
+   "label": "Marketing Service"
+  },
+  {
+   "fieldname": "column_break_68",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "maintenance_service",
+   "fieldtype": "Check",
+   "label": "Maintenance Service"
+  },
+  {
+   "fieldname": "column_break_70",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.marketing_service",
+   "fieldname": "marketing_based_on",
+   "fieldtype": "Select",
+   "label": "Marketing Based On",
+   "mandatory_depends_on": "eval:doc.marketing_service",
+   "options": "\nPercent\nAmount"
+  },
+  {
+   "depends_on": "eval:doc.marketing_based_on == \"Percent\"",
+   "fieldname": "marketing_percent",
+   "fieldtype": "Percent",
+   "label": "Marketing Percent (%)",
+   "mandatory_depends_on": "eval:doc.marketing_based_on == \"Percent\""
+  },
+  {
+   "depends_on": "eval:doc.marketing_based_on",
+   "fieldname": "marketing_amount",
+   "fieldtype": "Currency",
+   "label": "Marketing Amount",
+   "mandatory_depends_on": "eval:doc.marketing_based_on == \"Amount\"",
+   "read_only_depends_on": "eval:doc.marketing_based_on == \"Percent\""
+  },
+  {
+   "depends_on": "eval:doc.marketing_based_on",
+   "fieldname": "base_marketing_amount",
+   "fieldtype": "Currency",
+   "label": "Marketing Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.maintenance_service",
+   "fieldname": "maintenance_based_on",
+   "fieldtype": "Select",
+   "label": "Maintenance Based On",
+   "mandatory_depends_on": "eval:doc.maintenance_service",
+   "options": "\nPercent\nAmount"
+  },
+  {
+   "depends_on": "eval:doc.maintenance_based_on == \"Percent\"",
+   "fieldname": "maintenance_percent",
+   "fieldtype": "Percent",
+   "label": "Maintenance Percent (%)",
+   "mandatory_depends_on": "eval:doc.maintenance_based_on == \"Percent\""
+  },
+  {
+   "depends_on": "eval:doc.maintenance_based_on",
+   "fieldname": "maintenance_amount",
+   "fieldtype": "Currency",
+   "label": "Maintenance Amount",
+   "mandatory_depends_on": "eval:doc.maintenance_based_on == \"Amount\"",
+   "read_only_depends_on": "eval:doc.maintenance_based_on == \"Percent\""
+  },
+  {
+   "depends_on": "eval:doc.maintenance_based_on",
+   "fieldname": "base_maintenance_amount",
+   "fieldtype": "Currency",
+   "label": "Maintenance Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "grace_period",
+   "fieldtype": "Int",
+   "label": "Grace Period (Months)"
+  },
+  {
+   "default": "0",
+   "fieldname": "electricity",
+   "fieldtype": "Check",
+   "label": "Electricity"
+  },
+  {
+   "depends_on": "eval:doc.electricity",
+   "fieldname": "electricity_based_on",
+   "fieldtype": "Select",
+   "label": "Electricity Based On",
+   "mandatory_depends_on": "eval:doc.electricity",
+   "options": "\nPercent\nAmount"
+  },
+  {
+   "depends_on": "eval:doc.electricity_based_on == \"Percent\"",
+   "fieldname": "electricity_percent",
+   "fieldtype": "Percent",
+   "label": "Electricity Percent (%)",
+   "mandatory_depends_on": "eval:doc.electricity_based_on == \"Percent\""
+  },
+  {
+   "depends_on": "eval:doc.electricity_based_on",
+   "fieldname": "electricity_amount",
+   "fieldtype": "Currency",
+   "label": "Electricity Amount",
+   "mandatory_depends_on": "eval:doc.electricity_based_on == \"Amount\"",
+   "read_only_depends_on": "eval:doc.electricity_based_on == \"Percent\""
+  },
+  {
+   "depends_on": "eval:doc.electricity_based_on",
+   "fieldname": "base_electricity_amount",
+   "fieldtype": "Currency",
+   "label": "Electricity Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.marketing_based_on",
+   "fieldname": "marketing_increase_percent",
+   "fieldtype": "Percent",
+   "label": "Annual Increase (%)"
+  },
+  {
+   "default": "Fixed Rate",
+   "depends_on": "eval:doc.marketing_based_on",
+   "fieldname": "marketing_increase_type",
+   "fieldtype": "Select",
+   "label": "Annual Increase Type",
+   "options": "\nFixed Rate\nAccumulated Rate"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.maintenance_based_on",
+   "fieldname": "maintenance_increase_percent",
+   "fieldtype": "Percent",
+   "label": "Annual Increase (%)"
+  },
+  {
+   "default": "Fixed Rate",
+   "depends_on": "eval:doc.maintenance_based_on",
+   "fieldname": "maintenance_increase_type",
+   "fieldtype": "Select",
+   "label": "Annual Increase Type",
+   "options": "\nFixed Rate\nAccumulated Rate"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "depends_on": "eval:doc.with_insurance && doc.docstatus == 1",
+   "fieldname": "insurance_paid",
+   "fieldtype": "Check",
+   "label": "Insurance Paid",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "depends_on": "eval:doc.with_advanced_payment && doc.docstatus == 1",
+   "fieldname": "advanced_paid",
+   "fieldtype": "Check",
+   "label": "Advanced Paid",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.with_advanced_payment && doc.docstatus == 1 && doc.advanced_paid == 0",
+   "fieldname": "advanced_payment",
+   "fieldtype": "Button",
+   "label": "<b>Advanced Payment</b>"
+  },
+  {
+   "depends_on": "eval:doc.with_insurance && doc.docstatus == 1 && doc.insurance_paid ==0",
+   "fieldname": "insurance_payment",
+   "fieldtype": "Button",
+   "label": "<b>Insurance Payment</b>"
+  },
+  {
+   "default": "0",
+   "fieldname": "with_advanced_payment",
+   "fieldtype": "Check",
+   "label": "Advanced Payment"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.with_insurance && doc.docstatus == 1",
+   "fieldname": "insurance_pe",
+   "fieldtype": "Data",
+   "label": "Voucher No",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.with_advanced_payment && doc.docstatus == 1",
+   "fieldname": "advanced_pe",
+   "fieldtype": "Data",
+   "label": "Voucher No",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "create_water_journal",
+   "fieldtype": "Button",
+   "label": "<b>Create Water Journal</b>"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.docstatus == 1",
+   "fieldname": "water_section",
+   "fieldtype": "Section Break",
+   "label": "Water"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "base_water_amount",
+   "fieldtype": "Currency",
+   "label": "Water Amount (EGP)",
+   "no_copy": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "lease_item",
+   "fieldtype": "Link",
+   "label": "Lease Item",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contract_defaults_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Contract Defaults"
+  },
+  {
+   "fieldname": "default_mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Mode Of Payment",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "mode_of_payment_account",
+   "fieldtype": "Link",
+   "label": "Account Paid To",
+   "options": "Account",
+   "read_only": 1
+  },
+  {
+   "fieldname": "income_account",
+   "fieldtype": "Link",
+   "label": "Income Account",
+   "options": "Account",
+   "read_only": 1
+  },
+  {
+   "fieldname": "electricity_expense_account",
+   "fieldtype": "Link",
+   "label": "Electricity Expense Account",
+   "options": "Account"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "total_invoiced_amount",
+   "fieldtype": "Currency",
+   "label": "Total Invoiced Amount",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "base_total_invoiced_amount",
+   "fieldtype": "Currency",
+   "label": "Total Invoiced Amount (EGP)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_109",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [
   {
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "pms_lease_contract"
+  },
+  {
    "link_doctype": "Journal Entry",
+   "link_fieldname": "reference_link"
+  },
+  {
+   "link_doctype": "Payment Entry",
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-04-16 16:02:26.610107",
+ "modified": "2022-07-03 13:40:04.782604",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",

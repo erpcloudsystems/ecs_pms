@@ -53,6 +53,12 @@ frappe.query_reports["Lease Contract Report"] = {
 			"options":  "Area",
 		},
 		{
+			"fieldname":"phase",
+			"label": __("Phase"),
+			"fieldtype": "Link",
+			"options":  "Phase",
+		},
+		{
 			"fieldname":"activity",
 			"label": __("Activity"),
 			"fieldtype": "Link",
@@ -63,6 +69,12 @@ frappe.query_reports["Lease Contract Report"] = {
 			"label": __("Allocation"),
 			"fieldtype": "Select",
 			"options":  ["", "Prime", "Medium", "Low"],
+		},
+		{
+			"fieldname":"group_by",
+			"label": __("Group By"),
+			"fieldtype": "Select",
+			"options":  ["", "Unit Type", "Floor", "Area", "Zone", "Activity", "Phase"],
 		},
 	],
 };

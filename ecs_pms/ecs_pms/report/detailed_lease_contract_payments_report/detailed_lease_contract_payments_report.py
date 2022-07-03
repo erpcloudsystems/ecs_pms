@@ -143,31 +143,3 @@ def get_item_price_qty_data(filters):
             result.append(data)
 
     return result
-
-
-def get_price_map(price_list_names, buying=0, selling=0):
-    price_map = {}
-
-    if not price_list_names:
-        return price_map
-
-    rate_key = "Buying Rate" if buying else "Selling Rate"
-    price_list_key = "Buying Price List" if buying else "Selling Price List"
-
-    filters = {"name": ("in", price_list_names)}
-    if buying:
-        filters["buying"] = 1
-    else:
-        filters["selling"] = 1
-
-    pricing_details = frappe.get_all("Item Price",
-                                     fields=["name", "price_list", "price_list_rate"], filters=filters)
-
-    for d in pricing_details:
-        name = d["name"]
-        price_map[name] = {
-            price_list_key: d["price_list"],
-            rate_key: d["price_list_rate"]
-        }
-
-    return price_map

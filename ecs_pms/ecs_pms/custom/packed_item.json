@@ -17,6 +17,7 @@
    "idx": 0,
    "modified": "2021-12-12 10:03:07.320758",
    "modified_by": "Administrator",
+   "module_def": null,
    "name": "Packed Item-rate-read_only",
    "owner": "Administrator",
    "parent": null,

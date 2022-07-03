@@ -18,19 +18,19 @@ def get_columns():
 			"fieldname": "unit",
 			"fieldtype": "Link",
 			"options": "Unit",
-			"width": 100
+			"width": 80
 		},
 		{
 			"label": _("Unit Type"),
 			"fieldname": "type",
 			"fieldtype": "Data",
-			"width": 110
+			"width": 150
 		},
 		{
 			"label": _("Floor"),
 			"fieldname": "floor",
 			"fieldtype": "Data",
-			"width": 110
+			"width": 170
 		},
 		{
 			"label": _("Zone"),
@@ -45,6 +45,12 @@ def get_columns():
 			"width": 140
 		},
 		{
+			"label": _("Phase"),
+			"fieldname": "phase",
+			"fieldtype": "Data",
+			"width": 140
+		},
+		{
 			"label": _("Allocation"),
 			"fieldname": "allocation",
 			"fieldtype": "Data",
@@ -54,19 +60,19 @@ def get_columns():
 			"label": _("Activity"),
 			"fieldname": "activity",
 			"fieldtype": "Data",
-			"width": 140
+			"width": 190
 		},
 		{
 			"label": _("Internal Space"),
 			"fieldname": "internal_space",
 			"fieldtype": "Float",
-			"width": 130
+			"width": 120
 		},
 		{
 			"label": _("External Space"),
 			"fieldname": "external_space",
 			"fieldtype": "Float",
-			"width": 130
+			"width": 120
 		},
 		{
 			"label": _("Total Space"),
@@ -111,6 +117,8 @@ def get_item_price_qty_data(filters):
 		conditions += " and a.zone=%(zone)s"
 	if filters.get("area"):
 		conditions += " and a.area=%(area)s"
+	if filters.get("phase"):
+		conditions += " and a.phase=%(phase)s"
 	if filters.get("activity"):
 		conditions += " and a.activity=%(activity)s"
 	if filters.get("allocation"):
@@ -126,6 +134,7 @@ def get_item_price_qty_data(filters):
 					a.floor as floor,
 					a.zone as zone,
 					a.area as area,
+					a.phase as phase,
 					a.activity as activity,
 					a.allocation as allocation,
 					a.internal_space as internal_space,
@@ -149,6 +158,7 @@ def get_item_price_qty_data(filters):
 				'floor': item_dict.floor,
 				'zone': item_dict.zone,
 				'area': item_dict.area,
+				'phase': item_dict.phase,
 				'allocation': item_dict.allocation,
 				'internal_space': item_dict.internal_space,
 				'external_space': item_dict.external_space,

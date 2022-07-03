@@ -17,15 +17,60 @@
   },
   {
    "card": "Valid Quotations"
-  },
-  {
-   "card": "Average Meter Price"
   }
  ],
  "charts": [
   {
    "chart": "Units Status",
-   "width": "Half"
+   "width": "Full"
+  },
+  {
+   "chart": "Free Units Per Activity",
+   "width": "Full"
+  },
+  {
+   "chart": "Rented Units Per Activity",
+   "width": "Full"
+  },
+  {
+   "chart": "Free Units Per Area",
+   "width": "Full"
+  },
+  {
+   "chart": "Rented Units Per Area",
+   "width": "Full"
+  },
+  {
+   "chart": "Free Units Per Floor",
+   "width": "Full"
+  },
+  {
+   "chart": "Rented Units Per Floor",
+   "width": "Full"
+  },
+  {
+   "chart": "Free Units Per Type",
+   "width": "Full"
+  },
+  {
+   "chart": "Rented Units Per Type",
+   "width": "Full"
+  },
+  {
+   "chart": "Monthly Rental Per Activity",
+   "width": "Full"
+  },
+  {
+   "chart": "Monthly Rental Per Unit Type",
+   "width": "Full"
+  },
+  {
+   "chart": "Monthly Rental Per Floor",
+   "width": "Full"
+  },
+  {
+   "chart": "Monthly Rental Per Area",
+   "width": "Full"
   }
  ],
  "creation": "2022-03-28 17:02:45.055923",
@@ -35,7 +80,7 @@
  "idx": 1,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2022-04-16 15:41:23.508441",
+ "modified": "2022-04-18 17:29:22.465328",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Dashboard",

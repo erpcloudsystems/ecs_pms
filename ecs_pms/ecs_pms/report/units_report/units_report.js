@@ -35,6 +35,12 @@ frappe.query_reports["Units Report"] = {
 			"options":  "Area",
 		},
 		{
+			"fieldname":"phase",
+			"label": __("Phase"),
+			"fieldtype": "Link",
+			"options":  "Phase",
+		},
+		{
 			"fieldname":"activity",
 			"label": __("Activity"),
 			"fieldtype": "Link",

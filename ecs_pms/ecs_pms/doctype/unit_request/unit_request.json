@@ -10,6 +10,7 @@
  "field_order": [
   "naming_series",
   "customer_information_section",
+  "party_type",
   "customer",
   "customer_name",
   "customer_group",
@@ -18,11 +19,11 @@
   "status",
   "unit_information_section",
   "unit",
-  "name1",
   "type",
   "floor",
   "zone",
   "area",
+  "phase",
   "column_break_8",
   "activity",
   "allocation",
@@ -31,6 +32,7 @@
   "state",
   "unit_status",
   "request_notes_section",
+  "required_by_date",
   "notes",
   "amended_from"
  ],
@@ -49,27 +51,12 @@
   },
   {
    "fieldname": "customer",
-   "fieldtype": "Link",
+   "fieldtype": "Dynamic Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Customer",
-   "options": "Customer",
+   "options": "party_type",
    "reqd": 1
-  },
-  {
-   "fetch_from": "customer.customer_name",
-   "fieldname": "customer_name",
-   "fieldtype": "Data",
-   "label": "Customer Name",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "customer.customer_group",
-   "fieldname": "customer_group",
-   "fieldtype": "Link",
-   "label": "Customer Group",
-   "options": "Customer Group",
-   "read_only": 1
   },
   {
    "fieldname": "column_break_7",
@@ -105,13 +92,6 @@
    "label": "Unit",
    "options": "Unit",
    "reqd": 1
-  },
-  {
-   "fetch_from": "unit.name1",
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "label": "Name",
-   "read_only": 1
   },
   {
    "fetch_from": "unit.type",
@@ -223,6 +203,41 @@
    "options": "Unit Request",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Link",
+   "label": "Party Type",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_group",
+   "fieldtype": "Data",
+   "label": "Customer Group",
+   "read_only": 1
+  },
+  {
+   "fieldname": "required_by_date",
+   "fieldtype": "Date",
+   "label": "Required By Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "unit.phase",
+   "fieldname": "phase",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Phase",
+   "options": "Phase",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -233,7 +248,7 @@
    "link_fieldname": "unit_request"
   }
  ],
- "modified": "2022-03-28 16:46:29.497071",
+ "modified": "2022-06-05 10:38:57.189281",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "Unit Request",

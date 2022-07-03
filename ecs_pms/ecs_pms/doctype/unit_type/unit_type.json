@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:unit_type",
  "creation": "2022-03-28 13:55:55.131636",
@@ -23,7 +24,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-28 14:27:55.912112",
+ "modified": "2022-06-05 10:34:59.860256",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "Unit Type",

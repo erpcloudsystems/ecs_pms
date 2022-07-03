@@ -1,6 +1,11 @@
 {
  "category": "Modules",
- "charts": [],
+ "charts": [
+  {
+   "chart_name": "Units Status",
+   "label": "Units Status"
+  }
+ ],
  "creation": "2022-03-28 15:23:27.530057",
  "developer_mode_only": 0,
  "disable_user_customization": 0,
@@ -113,6 +118,24 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Unit Type",
+   "link_to": "Unit Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Phase",
+   "link_to": "Phase",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Customer Setup",
    "link_type": "DocType",
    "onboard": 0,
@@ -190,7 +213,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-04-16 16:08:07.058073",
+ "modified": "2022-06-05 11:50:54.971181",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "Property Management",

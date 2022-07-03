@@ -16,3 +16,56 @@ frappe.ui.form.on("Unit Request", {
         }
     }
 });
+
+frappe.ui.form.on("Unit Request", {
+	setup: function(frm) {
+		frm.set_query("party_type", function() {
+			return {
+				filters: [
+					["DocType","name", "in", ["Customer", "Lead"]]
+				]
+			};
+		});
+	}
+});
+
+
+frappe.ui.form.on('Unit Request', 'customer',  function(frm) {
+
+    if (cur_frm.doc.party_type =="Customer"){
+
+    frappe.call({ method: "frappe.client.get_value",
+	args: { doctype: "Customer",
+	fieldname: "customer_name",
+	filters: { 'name': cur_frm.doc.customer},
+	}, callback: function(r)
+	{cur_frm.set_value("customer_name", r.message.customer_name);
+  } });
+
+
+    frappe.call({ method: "frappe.client.get_value",
+	args: { doctype: "Customer",
+	fieldname: "customer_group",
+	filters: { 'name': cur_frm.doc.customer},
+	}, callback: function(r)
+	{cur_frm.set_value("customer_group", r.message.customer_group);
+  } });
+        }
+
+  if (cur_frm.doc.party_type =="Lead"){
+
+    frappe.call({ method: "frappe.client.get_value",
+    args: { doctype: "Lead",
+    fieldname: "lead_name",
+    filters: { 'name': cur_frm.doc.customer},
+    }, callback: function(r)
+    {cur_frm.set_value("customer_name", r.message.lead_name);
+  } });
+        }
+});
+
+frappe.ui.form.on('Unit Request', 'party_type', function(frm){
+    cur_frm.set_value("customer","");
+    cur_frm.set_value("customer_name","");
+    cur_frm.set_value("customer_group","");
+});

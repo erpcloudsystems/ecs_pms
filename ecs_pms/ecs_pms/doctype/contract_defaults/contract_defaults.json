@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-06-27 17:13:07.016182",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "electricity_expense_account",
+  "water_expense_account",
+  "insurance_account",
+  "default_item_code",
+  "default_mode_of_payment"
+ ],
+ "fields": [
+  {
+   "fieldname": "electricity_expense_account",
+   "fieldtype": "Link",
+   "label": "Electricity Expense Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "water_expense_account",
+   "fieldtype": "Link",
+   "label": "Water Expense Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_item_code",
+   "fieldtype": "Link",
+   "label": "Default Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "default_mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Default Mode Of Payment",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "insurance_account",
+   "fieldtype": "Link",
+   "label": "Insurance Account",
+   "options": "Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-06-28 17:05:06.512414",
+ "modified_by": "Administrator",
+ "module": "ECS PMS",
+ "name": "Contract Defaults",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
