@@ -123,9 +123,9 @@
   "lease_item",
   "default_mode_of_payment",
   "mode_of_payment_account",
+  "column_break_118",
   "income_account",
-  "electricity_expense_account",
-  "amended_from"
+  "electricity_expense_account"
  ],
  "fields": [
   {
@@ -948,13 +948,8 @@
    "read_only": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "PMS Lease Contract",
-   "print_hide": 1,
-   "read_only": 1
+   "fieldname": "column_break_118",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -973,7 +968,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-06 19:33:29.254116",
+ "modified": "2022-07-06 19:54:53.640282",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
