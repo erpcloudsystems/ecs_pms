@@ -20,7 +20,6 @@
   "cb_party",
   "posting_date",
   "is_signed",
-  "amended_from",
   "sb_signee",
   "signee",
   "signed_on",
@@ -155,15 +154,6 @@
   {
    "fieldname": "cb_party",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "PMS Lease Contract",
-   "print_hide": 1,
-   "read_only": 1
   },
   {
    "fieldname": "party",
@@ -337,15 +327,6 @@
    "fieldtype": "Currency",
    "label": "Total Amount Paid",
    "no_copy": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "PMS Lease Contract",
-   "print_hide": 1,
    "read_only": 1
   },
   {
@@ -971,7 +952,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-06 12:48:08.486641",
+ "modified": "2022-07-06 12:57:00.473125",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
