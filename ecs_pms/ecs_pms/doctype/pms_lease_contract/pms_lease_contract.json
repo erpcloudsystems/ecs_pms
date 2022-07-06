@@ -125,7 +125,7 @@
   "mode_of_payment_account",
   "income_account",
   "electricity_expense_account",
-  "advanced_payment"
+  "amended_from"
  ],
  "fields": [
   {
@@ -934,6 +934,15 @@
    "hidden": 1,
    "label": "Total No Of Months",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "PMS Lease Contract",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -952,7 +961,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-06 12:57:00.473125",
+ "modified": "2022-07-06 18:22:32.095686",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
