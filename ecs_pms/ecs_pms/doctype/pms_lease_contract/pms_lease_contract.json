@@ -28,7 +28,6 @@
   "signee_company",
   "signed_by_company",
   "sb_terms",
-  "contract_period",
   "no_of_years",
   "no_of_months",
   "total_no_of_months",
@@ -223,13 +222,6 @@
    "fieldname": "sb_terms",
    "fieldtype": "Section Break",
    "label": "Contract Period"
-  },
-  {
-   "fieldname": "contract_period",
-   "fieldtype": "Select",
-   "hidden": 1,
-   "label": "Contract Period UOM (Days / Months / Years)",
-   "options": "\nDays\nMonths\nYears"
   },
   {
    "fieldname": "no_of_years",
@@ -980,7 +972,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-05 21:11:25.626379",
+ "modified": "2022-07-06 12:21:15.010937",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
