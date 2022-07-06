@@ -83,6 +83,7 @@
   "with_advanced_payment",
   "advanced_amount",
   "base_advanced_amount",
+  "advanced_payment",
   "advanced_pe",
   "advanced_paid",
   "services_and_utilities_section",
@@ -122,10 +123,8 @@
   "lease_item",
   "default_mode_of_payment",
   "mode_of_payment_account",
-  "column_break_118",
   "income_account",
-  "electricity_expense_account",
-  "amended_from"
+  "electricity_expense_account"
  ],
  "fields": [
   {
@@ -936,17 +935,11 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_118",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "PMS Lease Contract",
-   "print_hide": 1,
-   "read_only": 1
+   "bold": 1,
+   "depends_on": "eval:doc.with_advanced_payment && doc.docstatus == 1 && doc.advanced_paid ==0",
+   "fieldname": "advanced_payment",
+   "fieldtype": "Button",
+   "label": "Advanced Payment"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -965,7 +958,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-06 20:30:52.964460",
+ "modified": "2022-07-06 21:26:34.555523",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
