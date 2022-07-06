@@ -126,7 +126,6 @@
   "mode_of_payment_account",
   "income_account",
   "electricity_expense_account",
-  "amended_from",
   "advanced_payment"
  ],
  "fields": [
@@ -972,7 +971,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-06 12:21:15.010937",
+ "modified": "2022-07-06 12:48:08.486641",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
