@@ -1,26 +1,44 @@
 // Copyright (c) 2022, ERP Cloud Systems and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('PMS Lease Contract', 'contract_period',  function(frm) {
-    if(cur_frm.doc.contract_period == "Months"){
-        cur_frm.set_value('no_of_months', '');
-        cur_frm.set_value('no_of_years', '');
-    }
-});
+
 
 frappe.ui.form.on("PMS Lease Contract", "no_of_years", function(frm){
-    var x = cur_frm.doc.no_of_years * 12;
-    cur_frm.set_value("no_of_months",x);
+    var x = (cur_frm.doc.no_of_years * 12) + cur_frm.doc.no_of_months;
+    cur_frm.set_value("total_no_of_months",x);
+});
+
+frappe.ui.form.on("PMS Lease Contract", "no_of_months", function(frm){
+    var x = (cur_frm.doc.no_of_years * 12) + cur_frm.doc.no_of_months;
+    cur_frm.set_value("total_no_of_months",x);
 });
 
 frappe.ui.form.on("PMS Lease Contract", "validate", function(frm){
-    if(cur_frm.doc.no_of_months <= 0){
-        frappe.throw("Please Enter No Of Months");
+    if(cur_frm.doc.total_no_of_months <= 0){
+        frappe.throw("Please Enter Contract Period");
     }
-    if(cur_frm.doc.contract_period == "Years" && cur_frm.doc.no_of_years <= 0){
-        frappe.throw("Please Enter No Of Years");
+    
+    if(cur_frm.doc.total_no_of_months > 240){
+        frappe.throw("Maximum Contract Length Is 20 Years");
     }
-    if(cur_frm.doc.no_of_months > 240){
+});
+
+frappe.ui.form.on("PMS Lease Contract", "internal_meter_price", function(frm){
+    var x = (cur_frm.doc.internal_meter_price * cur_frm.doc.internal_space) + (cur_frm.doc.external_meter_price * cur_frm.doc.external_space);
+    cur_frm.set_value("rent_value_",x);
+});
+ 
+frappe.ui.form.on("PMS Lease Contract", "external_meter_price", function(frm){
+    var x = (cur_frm.doc.internal_meter_price * cur_frm.doc.internal_space) + (cur_frm.doc.external_meter_price * cur_frm.doc.external_space);
+    cur_frm.set_value("rent_value_",x);
+}); 
+
+frappe.ui.form.on("PMS Lease Contract", "validate", function(frm){
+    if(cur_frm.doc.rent_value_ <= 0){
+        frappe.throw("Please Enter Internal and External Meter Price To Set Rent Value");
+    }
+    
+    if(cur_frm.doc.total_no_of_months > 240){
         frappe.throw("Maximum Contract Length Is 20 Years");
     }
 });
@@ -92,6 +110,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
                         "qty": 1,
                         "rate": d.base_net_total,
                         "uom": "Nos",
+                        "description": "القيمة الايجارية عن عقد رقم  "+"("+ frm.doc.name+") "+ "لشهر"+"( " +d.payment_date+")",
                         "conversion_factor": 1,
                         "cost_center": frm.doc.cost_center ,
                         "income_account": frm.doc.income_account ,
@@ -183,7 +202,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
             let accounts = [
                         {
                             "doctype": "Journal Entry Account",
-                            "account": frm.doc.electricity_expense_account,
+                            "account": frm.doc.mode_of_payment_account,
                             "debit": d.base_electricity,
                             "credit": 0,
                             "debit_in_account_currency": d.base_electricity,
@@ -191,7 +210,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
                         },
                         {
                             "doctype": "Journal Entry Account",
-                            "account": frm.doc.mode_of_payment_account,
+                            "account": frm.doc.electricity_expense_account,
                             "debit": 0,
                             "credit": d.base_electricity,
                             "credit_in_account_currency": d.base_electricity,

@@ -31,6 +31,7 @@
   "contract_period",
   "no_of_years",
   "no_of_months",
+  "total_no_of_months",
   "no_of_days",
   "cb_date",
   "grace_period",
@@ -64,8 +65,10 @@
   "base_minimum_rent",
   "rent_value_",
   "base_rent_value",
-  "meter_price",
-  "base_meter_price",
+  "internal_meter_price",
+  "internal_base_meter_price",
+  "external_meter_price",
+  "external_base_meter_price",
   "column_break_39",
   "annual_increase",
   "annual_increase_type",
@@ -123,7 +126,9 @@
   "default_mode_of_payment",
   "mode_of_payment_account",
   "income_account",
-  "electricity_expense_account"
+  "electricity_expense_account",
+  "amended_from",
+  "advanced_payment"
  ],
  "fields": [
   {
@@ -222,24 +227,19 @@
   {
    "fieldname": "contract_period",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Contract Period UOM (Days / Months / Years)",
-   "options": "\nDays\nMonths\nYears",
-   "reqd": 1
+   "options": "\nDays\nMonths\nYears"
   },
   {
-   "depends_on": "eval:doc.contract_period == \"Years\"",
    "fieldname": "no_of_years",
    "fieldtype": "Int",
-   "label": "No Of Years",
-   "mandatory_depends_on": "eval:doc.contract_period == \"Years\""
+   "label": "No Of Years"
   },
   {
-   "depends_on": "eval:doc.contract_period",
    "fieldname": "no_of_months",
    "fieldtype": "Int",
-   "label": "No Of Months",
-   "mandatory_depends_on": "eval:doc.contract_period == \"Months\"",
-   "read_only_depends_on": "eval:doc.contract_period == \"Years\""
+   "label": "No Of Months"
   },
   {
    "fieldname": "cb_date",
@@ -264,11 +264,10 @@
    "label": "Lease Unit Details"
   },
   {
-   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "rent_value_",
    "fieldtype": "Currency",
    "label": "Rent Amount",
-   "mandatory_depends_on": "eval:doc.revenue_type == \"Fixed Lease\""
+   "read_only": 1
   },
   {
    "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
@@ -473,14 +472,6 @@
    "label": "Accounting Details"
   },
   {
-   "allow_on_submit": 1,
-   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
-   "fieldname": "meter_price",
-   "fieldtype": "Currency",
-   "label": "Meter Price",
-   "read_only": 1
-  },
-  {
    "fieldname": "invoice_periodicity",
    "fieldtype": "Select",
    "label": "Invoice Periodicity",
@@ -515,18 +506,10 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
+   "depends_on": "eval:doc.currency != \"EGP\"",
    "fieldname": "base_rent_value",
    "fieldtype": "Currency",
    "label": "Rent Amount (EGP)",
-   "read_only": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
-   "fieldname": "base_meter_price",
-   "fieldtype": "Currency",
-   "label": "Meter Price (EGP)",
    "read_only": 1
   },
   {
@@ -607,11 +590,10 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.contract_period == \"Days\"",
+   "default": "0",
    "fieldname": "no_of_days",
    "fieldtype": "Int",
-   "label": "No Of Days",
-   "mandatory_depends_on": "eval:doc.contract_period == \"Days\""
+   "label": "No Of Days"
   },
   {
    "collapsible": 1,
@@ -678,6 +660,7 @@
    "options": "\nPercent\nAmount"
   },
   {
+   "default": "0",
    "depends_on": "eval:doc.marketing_based_on == \"Percent\"",
    "fieldname": "marketing_percent",
    "fieldtype": "Percent",
@@ -685,6 +668,7 @@
    "mandatory_depends_on": "eval:doc.marketing_based_on == \"Percent\""
   },
   {
+   "default": "0",
    "depends_on": "eval:doc.marketing_based_on",
    "fieldname": "marketing_amount",
    "fieldtype": "Currency",
@@ -715,6 +699,7 @@
    "mandatory_depends_on": "eval:doc.maintenance_based_on == \"Percent\""
   },
   {
+   "default": "0",
    "depends_on": "eval:doc.maintenance_based_on",
    "fieldname": "maintenance_amount",
    "fieldtype": "Currency",
@@ -757,6 +742,7 @@
    "mandatory_depends_on": "eval:doc.electricity_based_on == \"Percent\""
   },
   {
+   "default": "0",
    "depends_on": "eval:doc.electricity_based_on",
    "fieldname": "electricity_amount",
    "fieldtype": "Currency",
@@ -942,6 +928,40 @@
   {
    "fieldname": "column_break_109",
    "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
+   "fieldname": "internal_meter_price",
+   "fieldtype": "Currency",
+   "label": "Internal Meter Price"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\" && doc.currency != \"EGP\"",
+   "fieldname": "internal_base_meter_price",
+   "fieldtype": "Currency",
+   "label": "Internal Meter Price (EGP)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "external_meter_price",
+   "fieldtype": "Currency",
+   "label": "External Meter Price"
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\" && doc.currency != \"EGP\"",
+   "fieldname": "external_base_meter_price",
+   "fieldtype": "Currency",
+   "label": "External Meter Price (EGP)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_no_of_months",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Total No Of Months",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -960,7 +980,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-03 13:40:04.782604",
+ "modified": "2022-07-05 21:11:25.626379",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",

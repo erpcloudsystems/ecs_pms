@@ -33,14 +33,16 @@ class PMSLeaseContract(Document):
 
     @frappe.whitelist()
     def calculate_repayment_schedule(self):
+       
         if self.revenue_type == "Fixed Lease":
             self.contract_repayment_schedule = []
             payment_date = add_months(self.start_date, self.grace_period)
-            self.end_date = add_months(self.start_date, self.no_of_months)
+            self.end_date = add_months(self.start_date, self.total_no_of_months)
             monthly_payment = self.rent_value_
             fixed_value = self.rent_value_ * self.annual_increase / 100
-            a = self.no_of_months - self.grace_period
+            a = self.total_no_of_months - self.grace_period
             b = 1
+            
 
             x = self.rent_value_ + fixed_value
             x1 = x + (x * self.annual_increase / 100)
@@ -124,492 +126,621 @@ class PMSLeaseContract(Document):
                 next_payment_date = add_months(payment_date, 1)
                 payment_date = next_payment_date
 
-                if b >= 12 and b <= 23:
+                if b >= (12 - self.grace_period ) and b <= (23 - self.grace_period ):
                     rent_value = x
+                    daily_rent_value = rent_value / 30
                     marketing_value = m
+                    daily_marketing = marketing_value / 30
                     maintenance_value = s
+                    daily_maintenance = maintenance_value / 30
                     monthly_payment = rent_value
                     monthly_marketing = marketing_value
                     monthly_maintenance = maintenance_value
 
-                if b >= 24 and b <= 35:
+                if b >= (24 - self.grace_period ) and b <= (35 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (2 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x1
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (2 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m1
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (2 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s1
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 36 and b <= 47:
+                if b >= (36 - self.grace_period ) and b <= (47 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (3 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x2
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (3 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m2
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (3 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s2
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 48 and b <= 59:
+                if b >= (48 - self.grace_period ) and b <= (59 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (4 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x3
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (4 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m3
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (4 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s3
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 60 and b <= 71:
+                if b >= (60 - self.grace_period ) and b <= (71 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (5 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x4
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (5 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m4
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (5 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s4
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 72 and b <= 83:
+                if b >= (72 - self.grace_period ) and b <= (83 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (6 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x5
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (6 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m5
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (6 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
+                        
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s5
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 84 and b <= 95:
+                if b >= (84 - self.grace_period ) and b <= (95 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (7 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x6
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (7 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m6
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (7 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s6
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 96 and b <= 107:
+                if b >= (96 - self.grace_period ) and b <= (107 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (8 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x7
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (8 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m7
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (8 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s7
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 108 and b <= 119:
+                if b >= (108 - self.grace_period ) and b <= (119 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (9 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x8
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (9 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m8
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (9 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s8
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 120 and b <= 131:
+                if b >= (120 - self.grace_period ) and b <= (131 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (10 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x9
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (10 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m9
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (10 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s9
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 132 and b <= 143:
+                if b >= (132 - self.grace_period ) and b <= (143 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (11 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x10
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (11 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m10
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (11 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s10
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 144 and b <= 155:
+                if b >= (144 - self.grace_period ) and b <= (155 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (12 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x11
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (12 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m11
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (12 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s11
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 156 and b <= 167:
+                if b >= (156 - self.grace_period ) and b <= (167 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (13 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x12
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (13 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m12
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (13 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s12
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 168 and b <= 179:
+                if b >= (168 - self.grace_period ) and b <= (179 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (14 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x13
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (14 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m13
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (14 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s13
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 180 and b <= 191:
+                if b >= (180 - self.grace_period ) and b <= (191 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (15 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x14
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (15 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m14
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (15 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s14
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 192 and b <= 203:
-                    if self.annual_increase_type == "Fixed Rate":
+                if b >= (192 - self.grace_period ) and b <= (203 - self.grace_period ):
+                    if self.annual_increase_type == "Fixed Rate": 
                         rent_value = self.rent_value_ + (16 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x15
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (16 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m15
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (16 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s15
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 204 and b <= 215:
+                if b >= (204 - self.grace_period ) and b <= (215 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (17 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x16
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (17 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m16
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (17 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s16
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 216 and b <= 227:
+                if b >= (216 - self.grace_period ) and b <= (227 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (18 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x17
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (18 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m17
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (18 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s17
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 228 and b <= 239:
+                if b >= (228 - self.grace_period ) and b <= (239 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (19 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x18
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (19 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m18
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (19 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s18
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value / 30
 
-                if b >= 240 and b <= 251:
+                if b >= (240 - self.grace_period ) and b <= (251 - self.grace_period ):
                     if self.annual_increase_type == "Fixed Rate":
                         rent_value = self.rent_value_ + (20 * fixed_value)
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.annual_increase_type == "Accumulated Rate":
                         rent_value = x19
                         monthly_payment = rent_value
+                        daily_rent_value = rent_value / 30
 
                     if self.marketing_increase_type == "Fixed Rate":
                         marketing_value = self.marketing_amount + (20 * fixed_value1)
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.marketing_increase_type == "Accumulated Rate":
                         marketing_value = m19
                         monthly_marketing = marketing_value
+                        daily_marketing = marketing_value / 30
 
                     if self.maintenance_increase_type == "Fixed Rate":
                         maintenance_value = self.maintenance_amount + (20 * fixed_value2)
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value /30
 
                     if self.maintenance_increase_type == "Accumulated Rate":
                         maintenance_value = s19
                         monthly_maintenance = maintenance_value
+                        daily_maintenance = maintenance_value /30
 
                 b += 1
                 a -= 1
-
+            if self.no_of_days >= 0:
+                self.append("contract_repayment_schedule", {
+                    "payment_date": payment_date,
+                    "monthly_payment": daily_rent_value * self.no_of_days,
+                    "base_monthly_payment_": (daily_rent_value * self.no_of_days) * self.conversion_rate,
+                    "marketing": daily_marketing * self.no_of_days,
+                    "base_marketing": (daily_marketing * self.no_of_days) * self.conversion_rate,
+                    "maintenance": daily_maintenance * self.no_of_days,
+                    "base_maintenance": (daily_maintenance * self.no_of_days) * self.conversion_rate,
+					"electricity": (self.electricity_amount / 30) * self.no_of_days,
+					"base_electricity": (self.base_electricity_amount / 30) * self.no_of_days
+                })
             total = 0
             for d in self.contract_repayment_schedule:
                 d.total = d.monthly_payment + d.marketing + d.maintenance
@@ -617,9 +748,12 @@ class PMSLeaseContract(Document):
                 d.net_total = d.monthly_payment + d.marketing + d.maintenance
                 d.base_net_total = (d.monthly_payment + d.marketing + d.maintenance) * self.conversion_rate
                 total += d.net_total
+                d.invoice_amount = 0
+                d.paid_amount = 0
+                d.outstanding_amount = 0
             self.total_payable_amount = total
             self.base_total_payable_amount = self.conversion_rate * self.total_payable_amount
-
+            
     @frappe.whitelist()
     def calculate_net_total(self):
         total = 0
@@ -700,7 +834,7 @@ class PMSLeaseContract(Document):
         accounts = [
             {
                 "doctype": "Journal Entry Account",
-                "account": water_expense_account,
+                "account": customer_account,
                 "credit": 0,
                 "debit": self.base_water_amount,
                 "debit_in_account_currency": self.base_water_amount,
@@ -709,7 +843,7 @@ class PMSLeaseContract(Document):
             },
             {
                 "doctype": "Journal Entry Account",
-                "account": customer_account,
+                "account": water_expense_account,
                 "party_type": "Customer",
                 "party": self.party,
                 "credit": self.base_water_amount,
