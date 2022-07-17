@@ -134,6 +134,7 @@ class PMSLeaseContract(Document):
 
                 if b >= (12 - self.grace_period ) and b <= (23 - self.grace_period ):
                     rent_value = x
+                    daily_rent_value = 0
                     daily_rent_value = rent_value / 30
                     marketing_value = m
                     daily_marketing = marketing_value / 30
