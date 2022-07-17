@@ -41,7 +41,7 @@ class PMSLeaseContract(Document):
         daily_marketing = 0
         monthly_maintenance = 0
         daily_maintenance = 0
-        if self.revenue_type == "Fixed Lease":
+        if self.revenue_type == "Fixed Lease" or "Revenue Share + Fixed Rent" or "Revenue Share / Minimum Rent":
             self.contract_repayment_schedule = []
             payment_date = add_months(self.start_date, self.grace_period)
             self.end_date = add_months(self.start_date, self.total_no_of_months)
