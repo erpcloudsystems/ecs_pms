@@ -15,6 +15,9 @@ from frappe import _
 from six import string_types
 from frappe.utils import flt, rounded, add_months, nowdate, getdate, now_datetime
 from erpnext.setup.utils import get_exchange_rate
+from datetime import datetime
+from datetime import timedelta
+from datetime import date
 
 
 class PMSLeaseContract(Document):
@@ -37,7 +40,10 @@ class PMSLeaseContract(Document):
         if self.revenue_type == "Fixed Lease":
             self.contract_repayment_schedule = []
             payment_date = add_months(self.start_date, self.grace_period)
-            self.end_date = add_months(self.start_date, self.total_no_of_months)
+            self.end_date = add_months(self.start_date, self.total_no_of_months) 
+            if self.no_of_days > 0:
+               end_date = add_months(self.start_date, self.total_no_of_months) 
+               self.end_date = add_days(end_date, days=(self.no_of_days - 1))
             monthly_payment = self.rent_value_
             fixed_value = self.rent_value_ * self.annual_increase / 100
             a = self.total_no_of_months - self.grace_period
@@ -835,6 +841,8 @@ class PMSLeaseContract(Document):
             {
                 "doctype": "Journal Entry Account",
                 "account": customer_account,
+                "party_type": "Customer",
+                "party": self.party,
                 "credit": 0,
                 "debit": self.base_water_amount,
                 "debit_in_account_currency": self.base_water_amount,
@@ -844,8 +852,7 @@ class PMSLeaseContract(Document):
             {
                 "doctype": "Journal Entry Account",
                 "account": water_expense_account,
-                "party_type": "Customer",
-                "party": self.party,
+                
                 "credit": self.base_water_amount,
                 "debit": 0,
                 "credit_in_account_currency": self.base_water_amount,
@@ -880,6 +887,8 @@ class PMSLeaseContract(Document):
             {
                 "doctype": "Journal Entry Account",
                 "account": electricity_expense_account,
+                "party_type": "Customer",
+                "party": self.party,
                 "credit": 0,
                 "debit": self.base_electricity_amount,
                 "debit_in_account_currency": self.base_electricity_amount, 
@@ -889,8 +898,7 @@ class PMSLeaseContract(Document):
             {
                 "doctype": "Journal Entry Account",
                 "account": customer_account,
-                "party_type": "Customer",
-                "party": self.party,
+                
                 "credit": self.base_electricity_amount,
                 "debit": 0,
                 "credit_in_account_currency": self.base_electricity_amount,
