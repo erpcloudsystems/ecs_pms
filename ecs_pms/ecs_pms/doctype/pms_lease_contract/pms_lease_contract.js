@@ -207,7 +207,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
                             "account": frm.doc.mode_of_payment_account,
                             "debit": d.base_electricity,
                             "party_type": "Customer",
-               		    "party": frm.doc.party,
+               		        "party": frm.doc.party,
                             "credit": 0,
                             "debit_in_account_currency": d.base_electricity,
                             "user_remark": cur_frm.docname
@@ -218,6 +218,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
                             "debit": 0,
                             "credit": d.base_electricity,
                             "credit_in_account_currency": d.base_electricity,
+                            "cost_center": frm.doc.cost_center,
                             "user_remark": cur_frm.docname
                         },
         

@@ -36,19 +36,19 @@ class PMSLeaseContract(Document):
 
     @frappe.whitelist()
     def calculate_repayment_schedule(self):
-    	
         if self.revenue_type == "Fixed Lease":
-           self.contract_repayment_schedule = []
-           payment_date = add_months(self.start_date, self.grace_period)
-           self.end_date = add_months(self.start_date, self.total_no_of_months) 
-           if self.no_of_days > 0:
-              end_date = add_months(self.start_date, self.total_no_of_months) 
-              self.end_date = add_days(end_date, days=(self.no_of_days - 1))
-	    monthly_payment = self.rent_value_
-	    fixed_value = self.rent_value_ * self.annual_increase / 100
-	    a = self.total_no_of_months - self.grace_period
-	    b = 1
+            self.contract_repayment_schedule = []
+            payment_date = add_months(self.start_date, self.grace_period)
+            self.end_date = add_months(self.start_date, self.total_no_of_months)
             
+            if self.no_of_days > 0:
+                end_date = add_months(self.start_date, self.total_no_of_months)
+                self.end_date = add_days(end_date, days=(self.no_of_days - 1))
+
+            monthly_payment = self.rent_value_
+            fixed_value = self.rent_value_ * self.annual_increase / 100
+            a = self.total_no_of_months - self.grace_period
+            b = 1
 
             x = self.rent_value_ + fixed_value
             x1 = x + (x * self.annual_increase / 100)
