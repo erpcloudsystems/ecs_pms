@@ -227,6 +227,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
             je["voucher_type"] = "Journal Entry";
             je["posting_date"] = d.payment_date;
             je["reference_doctype"] = "PMS Lease Contract";
+            je["row_name"] = d.name;
             je["reference_link"] = cur_frm.doc.name;
             je["cheque_no"] = cur_frm.doc.name;
             je["bill_no"] = d.name;
