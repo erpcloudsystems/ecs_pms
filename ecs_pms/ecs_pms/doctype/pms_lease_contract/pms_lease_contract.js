@@ -112,6 +112,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
                         "uom": "Nos",
                         "description": "القيمة الايجارية عن عقد رقم  "+"("+ frm.doc.name+") "+ "لشهر"+"( " +d.payment_date+")",
                         "conversion_factor": 1,
+                        "item_tax_template": frm.doc.default_tax_template,
                         "cost_center": frm.doc.cost_center ,
                         "income_account": frm.doc.income_account ,
                     },
@@ -120,6 +121,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
         si["doctype"] = "Sales Invoice";
         si["customer"] = frm.doc.party;
         si["payment_date"] = d.payment_date;
+        si["posting_date"] = d.payment_date;
         si["row_name"] = d.name;
         si["posting_date"] = d.payment_date;
         si["due_date"] = d.payment_date;
@@ -204,6 +206,8 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
                             "doctype": "Journal Entry Account",
                             "account": frm.doc.mode_of_payment_account,
                             "debit": d.base_electricity,
+                            "party_type": "Customer",
+               		    "party": frm.doc.party,
                             "credit": 0,
                             "debit_in_account_currency": d.base_electricity,
                             "user_remark": cur_frm.docname
@@ -221,11 +225,12 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
         
             je["doctype"] = "Journal Entry";
             je["voucher_type"] = "Journal Entry";
+            je["posting_date"] = d.payment_date;
             je["reference_doctype"] = "PMS Lease Contract";
             je["reference_link"] = cur_frm.doc.name;
             je["cheque_no"] = cur_frm.doc.name;
             je["bill_no"] = d.name;
-            si["cost_center"] = cur_frm.doc.cost_center;
+            je["cost_center"] = cur_frm.doc.cost_center;
             je["cheque_date"] = d.payment_date;
             je["posting_date"] = d.payment_date;
         

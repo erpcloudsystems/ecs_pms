@@ -790,6 +790,8 @@ class PMSLeaseContract(Document):
         self.electricity_expense_account = electricity_account
         mode_of_payment_account = frappe.db.get_value('Mode of Payment Account', {'parent': mode_of_payment},'default_account')
         self.mode_of_payment_account = mode_of_payment_account
+        default_tax_template = frappe.db.get_value("Item", {"Name": sales_invoice_item}, "default_tax_template")
+        self.default_tax_template = default_tax_template
 
     @frappe.whitelist()
     def calculate_net_totals(self): 

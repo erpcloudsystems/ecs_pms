@@ -124,7 +124,9 @@
   "default_mode_of_payment",
   "mode_of_payment_account",
   "income_account",
-  "electricity_expense_account"
+  "electricity_expense_account",
+  "default_tax_template",
+  "amended_from"
  ],
  "fields": [
   {
@@ -282,8 +284,7 @@
    "fieldname": "cost_center",
    "fieldtype": "Link",
    "label": "Cost Center",
-   "options": "Cost Center",
-   "reqd": 1
+   "options": "Cost Center"
   },
   {
    "collapsible": 1,
@@ -485,6 +486,7 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "eval:doc.with_insurance",
    "fieldname": "base_insurance_value",
    "fieldtype": "Currency",
@@ -940,6 +942,23 @@
    "fieldname": "advanced_payment",
    "fieldtype": "Button",
    "label": "Advanced Payment"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "PMS Lease Contract",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "default_tax_template",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Default Tax Template",
+   "options": "Item Tax Template",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -958,7 +977,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-06 21:26:34.555523",
+ "modified": "2022-07-17 12:23:08.865765",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
