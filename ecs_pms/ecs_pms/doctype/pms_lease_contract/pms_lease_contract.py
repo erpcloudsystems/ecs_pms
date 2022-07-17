@@ -44,80 +44,81 @@ class PMSLeaseContract(Document):
            if self.no_of_days > 0:
               end_date = add_months(self.start_date, self.total_no_of_months) 
               self.end_date = add_days(end_date, days=(self.no_of_days - 1))
-	   monthly_payment = self.rent_value_
-	   fixed_value = self.rent_value_ * self.annual_increase / 100
-	   a = self.total_no_of_months - self.grace_period
-	   b = 1
-	   daily_rent_value = 0
-           x = self.rent_value_ + fixed_value
-           x1 = x + (x * self.annual_increase / 100)
-           x2 = x1 + (x1 * self.annual_increase / 100)
-           x3 = x2 + (x2 * self.annual_increase / 100)
-           x4 = x3 + (x3 * self.annual_increase / 100)
-           x5 = x4 + (x4 * self.annual_increase / 100)
-           x6 = x5 + (x5 * self.annual_increase / 100)
-           x7 = x6 + (x6 * self.annual_increase / 100)
-           x8 = x7 + (x7 * self.annual_increase / 100)
-           x9 = x8 + (x8 * self.annual_increase / 100)
-           x10 = x9 + (x9 * self.annual_increase / 100)
-           x11 = x10 + (x10 * self.annual_increase / 100)
-           x12 = x11 + (x11 * self.annual_increase / 100)
-           x13 = x12 + (x12 * self.annual_increase / 100)
-           x14 = x13 + (x13 * self.annual_increase / 100)
-           x15 = x14 + (x14 * self.annual_increase / 100)
-           x16 = x15 + (x15 * self.annual_increase / 100)
-           x17 = x16 + (x16 * self.annual_increase / 100)
-           x18 = x17 + (x17 * self.annual_increase / 100)
-           x19 = x18 + (x18 * self.annual_increase / 100)
+	    monthly_payment = self.rent_value_
+	    fixed_value = self.rent_value_ * self.annual_increase / 100
+	    a = self.total_no_of_months - self.grace_period
+	    b = 1
+            
 
-           fixed_value1 = self.marketing_amount * self.marketing_increase_percent / 100
-           monthly_marketing = self.marketing_amount
-           m = self.marketing_amount + fixed_value1
-           m1 = m + (m * self.marketing_increase_percent / 100)
-           m2 = m1 + (m1 * self.marketing_increase_percent / 100)
-           m3 = m2 + (m2 * self.marketing_increase_percent / 100)
-           m4 = m3 + (m3 * self.marketing_increase_percent / 100)
-           m5 = m4 + (m4 * self.marketing_increase_percent / 100)
-           m6 = m5 + (m5 * self.marketing_increase_percent / 100)
-           m7 = m6 + (m6 * self.marketing_increase_percent / 100)
-           m8 = m7 + (m7 * self.marketing_increase_percent / 100)
-           m9 = m8 + (m8 * self.marketing_increase_percent / 100)
-           m10 = m9 + (m9 * self.marketing_increase_percent / 100)
-           m11 = m10 + (m10 * self.marketing_increase_percent / 100)
-           m12 = m11 + (m11 * self.marketing_increase_percent / 100)
-           m13 = m12 + (m12 * self.marketing_increase_percent / 100)
-           m14 = m13 + (m13 * self.marketing_increase_percent / 100)
-           m15 = m14 + (m14 * self.marketing_increase_percent / 100)
-           m16 = m15 + (m15 * self.marketing_increase_percent / 100)
-           m17 = m16 + (m16 * self.marketing_increase_percent / 100)
-           m18 = m17 + (m17 * self.marketing_increase_percent / 100)
-           m19 = m18 + (m18 * self.marketing_increase_percent / 100)
+            x = self.rent_value_ + fixed_value
+            x1 = x + (x * self.annual_increase / 100)
+            x2 = x1 + (x1 * self.annual_increase / 100)
+            x3 = x2 + (x2 * self.annual_increase / 100)
+            x4 = x3 + (x3 * self.annual_increase / 100)
+            x5 = x4 + (x4 * self.annual_increase / 100)
+            x6 = x5 + (x5 * self.annual_increase / 100)
+            x7 = x6 + (x6 * self.annual_increase / 100)
+            x8 = x7 + (x7 * self.annual_increase / 100)
+            x9 = x8 + (x8 * self.annual_increase / 100)
+            x10 = x9 + (x9 * self.annual_increase / 100)
+            x11 = x10 + (x10 * self.annual_increase / 100)
+            x12 = x11 + (x11 * self.annual_increase / 100)
+            x13 = x12 + (x12 * self.annual_increase / 100)
+            x14 = x13 + (x13 * self.annual_increase / 100)
+            x15 = x14 + (x14 * self.annual_increase / 100)
+            x16 = x15 + (x15 * self.annual_increase / 100)
+            x17 = x16 + (x16 * self.annual_increase / 100)
+            x18 = x17 + (x17 * self.annual_increase / 100)
+            x19 = x18 + (x18 * self.annual_increase / 100)
 
-           fixed_value2 = self.maintenance_amount * self.maintenance_increase_percent / 100
-           monthly_maintenance = self.maintenance_amount
-           s = self.maintenance_amount + fixed_value2
-           s1 = s + (s * self.maintenance_increase_percent / 100)
-           s2 = s1 + (s1 * self.maintenance_increase_percent / 100)
-           s3 = s2 + (s2 * self.maintenance_increase_percent / 100)
-           s4 = s3 + (s3 * self.maintenance_increase_percent / 100)
-           s5 = s4 + (s4 * self.maintenance_increase_percent / 100)
-           s6 = s5 + (s5 * self.maintenance_increase_percent / 100)
-           s7 = s6 + (s6 * self.maintenance_increase_percent / 100)
-           s8 = s7 + (s7 * self.maintenance_increase_percent / 100)
-           s9 = s8 + (s8 * self.maintenance_increase_percent / 100)
-           s10 = s9 + (s9 * self.maintenance_increase_percent / 100)
-           s11 = s10 + (s10 * self.maintenance_increase_percent / 100)
-           s12 = s11 + (s11 * self.maintenance_increase_percent / 100)
-           s13 = s12 + (s12 * self.maintenance_increase_percent / 100)
-           s14 = s13 + (s13 * self.maintenance_increase_percent / 100)
-           s15 = s14 + (s14 * self.maintenance_increase_percent / 100)
-           s16 = s15 + (s15 * self.maintenance_increase_percent / 100)
-           s17 = s16 + (s16 * self.maintenance_increase_percent / 100)
-           s18 = s17 + (s17 * self.maintenance_increase_percent / 100)
-           s19 = s18 + (s18 * self.maintenance_increase_percent / 100)
+            fixed_value1 = self.marketing_amount * self.marketing_increase_percent / 100
+            monthly_marketing = self.marketing_amount
+            m = self.marketing_amount + fixed_value1
+            m1 = m + (m * self.marketing_increase_percent / 100)
+            m2 = m1 + (m1 * self.marketing_increase_percent / 100)
+            m3 = m2 + (m2 * self.marketing_increase_percent / 100)
+            m4 = m3 + (m3 * self.marketing_increase_percent / 100)
+            m5 = m4 + (m4 * self.marketing_increase_percent / 100)
+            m6 = m5 + (m5 * self.marketing_increase_percent / 100)
+            m7 = m6 + (m6 * self.marketing_increase_percent / 100)
+            m8 = m7 + (m7 * self.marketing_increase_percent / 100)
+            m9 = m8 + (m8 * self.marketing_increase_percent / 100)
+            m10 = m9 + (m9 * self.marketing_increase_percent / 100)
+            m11 = m10 + (m10 * self.marketing_increase_percent / 100)
+            m12 = m11 + (m11 * self.marketing_increase_percent / 100)
+            m13 = m12 + (m12 * self.marketing_increase_percent / 100)
+            m14 = m13 + (m13 * self.marketing_increase_percent / 100)
+            m15 = m14 + (m14 * self.marketing_increase_percent / 100)
+            m16 = m15 + (m15 * self.marketing_increase_percent / 100)
+            m17 = m16 + (m16 * self.marketing_increase_percent / 100)
+            m18 = m17 + (m17 * self.marketing_increase_percent / 100)
+            m19 = m18 + (m18 * self.marketing_increase_percent / 100)
 
-           while (a > 0):
-               self.append("contract_repayment_schedule", {
+            fixed_value2 = self.maintenance_amount * self.maintenance_increase_percent / 100
+            monthly_maintenance = self.maintenance_amount
+            s = self.maintenance_amount + fixed_value2
+            s1 = s + (s * self.maintenance_increase_percent / 100)
+            s2 = s1 + (s1 * self.maintenance_increase_percent / 100)
+            s3 = s2 + (s2 * self.maintenance_increase_percent / 100)
+            s4 = s3 + (s3 * self.maintenance_increase_percent / 100)
+            s5 = s4 + (s4 * self.maintenance_increase_percent / 100)
+            s6 = s5 + (s5 * self.maintenance_increase_percent / 100)
+            s7 = s6 + (s6 * self.maintenance_increase_percent / 100)
+            s8 = s7 + (s7 * self.maintenance_increase_percent / 100)
+            s9 = s8 + (s8 * self.maintenance_increase_percent / 100)
+            s10 = s9 + (s9 * self.maintenance_increase_percent / 100)
+            s11 = s10 + (s10 * self.maintenance_increase_percent / 100)
+            s12 = s11 + (s11 * self.maintenance_increase_percent / 100)
+            s13 = s12 + (s12 * self.maintenance_increase_percent / 100)
+            s14 = s13 + (s13 * self.maintenance_increase_percent / 100)
+            s15 = s14 + (s14 * self.maintenance_increase_percent / 100)
+            s16 = s15 + (s15 * self.maintenance_increase_percent / 100)
+            s17 = s16 + (s16 * self.maintenance_increase_percent / 100)
+            s18 = s17 + (s17 * self.maintenance_increase_percent / 100)
+            s19 = s18 + (s18 * self.maintenance_increase_percent / 100)
+
+            while (a > 0):
+                self.append("contract_repayment_schedule", {
                     "payment_date": payment_date,
                     "monthly_payment": monthly_payment,
                     "base_monthly_payment_": monthly_payment * self.conversion_rate,
@@ -133,7 +134,7 @@ class PMSLeaseContract(Document):
 
                 if b >= (12 - self.grace_period ) and b <= (23 - self.grace_period ):
                     rent_value = x
-                   
+                    daily_rent_value = 0
                     daily_rent_value = rent_value / 30
                     marketing_value = m
                     daily_marketing = marketing_value / 30
