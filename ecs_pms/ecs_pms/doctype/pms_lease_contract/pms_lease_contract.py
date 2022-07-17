@@ -36,6 +36,7 @@ class PMSLeaseContract(Document):
 
     @frappe.whitelist()
     def calculate_repayment_schedule(self):
+        daily_rent_value = 0
         if self.revenue_type == "Fixed Lease":
             self.contract_repayment_schedule = []
             payment_date = add_months(self.start_date, self.grace_period)
@@ -134,7 +135,6 @@ class PMSLeaseContract(Document):
 
                 if b >= (12 - self.grace_period ) and b <= (23 - self.grace_period ):
                     rent_value = x
-                    daily_rent_value = 0
                     daily_rent_value = rent_value / 30
                     marketing_value = m
                     daily_marketing = marketing_value / 30
