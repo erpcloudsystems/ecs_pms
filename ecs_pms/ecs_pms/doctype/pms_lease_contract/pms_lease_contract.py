@@ -790,8 +790,7 @@ class PMSLeaseContract(Document):
         self.base_total_payable_amount = self.conversion_rate * self.total_payable_amount
     @frappe.whitelist()
     def contract_defaults(self):
-        account = frappe.db.get_value("Party Account", {"parent": self.customer_group}, "account")
-        self.income_account = account
+        
         sales_invoice_item = frappe.db.get_single_value("Contract Defaults", "default_item_code")
         self.lease_item = sales_invoice_item
         mode_of_payment = frappe.db.get_single_value("Contract Defaults", "default_mode_of_payment")
@@ -848,7 +847,7 @@ class PMSLeaseContract(Document):
     @frappe.whitelist()
     def create_water_journal(self):
         water_expense_account = frappe.db.get_single_value("Contract Defaults", "water_expense_account")
-        customer_account = frappe.db.get_value("Party Account", {"parent": self.party}, "account")
+        customer_account = frappe.db.get_value("Party Account", {"parent": self.customer_group}, "account")
         accounts = [
             {
                 "doctype": "Journal Entry Account",
