@@ -36,7 +36,6 @@ class PMSLeaseContract(Document):
 
     @frappe.whitelist()
     def calculate_repayment_schedule(self):
-        daily_rent_value = 0
         monthly_marketing = 0
         daily_marketing = 0
         monthly_maintenance = 0
@@ -52,7 +51,7 @@ class PMSLeaseContract(Document):
 
             monthly_payment = self.rent_value_
             fixed_value = self.rent_value_ * self.annual_increase / 100
-            a = self.total_no_of_months - self.grace_period
+            a = self.total_no_of_months  - self.grace_period
             b = 1
 
             x = self.rent_value_ + fixed_value
@@ -101,7 +100,7 @@ class PMSLeaseContract(Document):
             if self.maintenance_service:
                 fixed_value2 = self.maintenance_amount * self.maintenance_increase_percent / 100
                 monthly_maintenance = self.maintenance_amount
-                s = self.maintenance_amount + fixed_value2
+                s = self.maintenance_amount + fixed_value2              
                 s1 = s + (s * self.maintenance_increase_percent / 100)
                 s2 = s1 + (s1 * self.maintenance_increase_percent / 100)
                 s3 = s2 + (s2 * self.maintenance_increase_percent / 100)
@@ -136,10 +135,14 @@ class PMSLeaseContract(Document):
                 })
                 next_payment_date = add_months(payment_date, 1)
                 payment_date = next_payment_date
-
+                rent_value = x
+                daily_rent = x / 30
+                daily_rent_value = daily_rent
+            
                 if b >= (12 - self.grace_period ) and b <= (23 - self.grace_period ):
                     rent_value = x
-                    daily_rent_value = rent_value / 30
+                    daily_rent = x / 30
+                    daily_rent_value = daily_rent
                     marketing_value = m
                     daily_marketing = marketing_value / 30
                     maintenance_value = s
@@ -740,7 +743,9 @@ class PMSLeaseContract(Document):
 
                 b += 1
                 a -= 1
-            if self.no_of_days >= 0:
+            if self.no_of_days > 0:
+                next_payment_date = add_days(payment_date, days=(self.no_of_days - 1))
+                payment_date = next_payment_date
                 self.append("contract_repayment_schedule", {
                     "payment_date": payment_date,
                     "monthly_payment": daily_rent_value * self.no_of_days,
