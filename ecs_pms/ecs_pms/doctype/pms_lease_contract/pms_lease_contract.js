@@ -14,9 +14,9 @@ frappe.ui.form.on("PMS Lease Contract", "no_of_months", function(frm){
 });
 
 frappe.ui.form.on("PMS Lease Contract", "validate", function(frm){
-    if(cur_frm.doc.total_no_of_months <= 0){
-        frappe.throw("Please Enter Contract Period");
-    }
+    //if(cur_frm.doc.total_no_of_months <= 0){
+        //frappe.throw("Please Enter Contract Period");
+    //}
     
     if(cur_frm.doc.total_no_of_months > 240){
         frappe.throw("Maximum Contract Length Is 20 Years");
@@ -26,17 +26,27 @@ frappe.ui.form.on("PMS Lease Contract", "validate", function(frm){
 frappe.ui.form.on("PMS Lease Contract", "internal_meter_price", function(frm){
     var x = (cur_frm.doc.internal_meter_price * cur_frm.doc.internal_space) + (cur_frm.doc.external_meter_price * cur_frm.doc.external_space);
     cur_frm.set_value("rent_value_",x);
+    cur_frm.set_value("fixed_rent1",x);
+    cur_frm.set_value("minimum_rent",x);
 });
- 
+
+
+frappe.ui.form.on("PMS Lease Contract", "promotion_rent_amount", function(frm){
+    var x = cur_frm.doc.promotion_rent_amount ;
+    cur_frm.set_value("rent_value_",x);
+});
+
 frappe.ui.form.on("PMS Lease Contract", "external_meter_price", function(frm){
     var x = (cur_frm.doc.internal_meter_price * cur_frm.doc.internal_space) + (cur_frm.doc.external_meter_price * cur_frm.doc.external_space);
     cur_frm.set_value("rent_value_",x);
+    cur_frm.set_value("fixed_rent1",x);
+    cur_frm.set_value("minimum_rent",x);
 }); 
 
 frappe.ui.form.on("PMS Lease Contract", "validate", function(frm){
-    if(cur_frm.doc.rent_value_ <= 0){
-        frappe.throw("Please Enter Internal and External Meter Price To Set Rent Value");
-    }
+   // if(cur_frm.doc.rent_value_ <= 0 && cur_frm.doc.revenue_type !="Revenue Share" ){
+      //  frappe.throw("Please Enter Internal and External Meter Price To Set Rent Value");
+   // }
     
     if(cur_frm.doc.total_no_of_months > 240){
         frappe.throw("Maximum Contract Length Is 20 Years");
@@ -100,6 +110,9 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
                             }
                     );
     }
+
+
+   
         function populate_je_obj(frm, data) {
         var d = locals[cdt][cdn];
         let si = {};
@@ -110,14 +123,23 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
                         "qty": 1,
                         "rate": d.base_net_total,
                         "uom": "Nos",
-                        "description": "القيمة الايجارية عن عقد رقم  "+"("+ frm.doc.name+") "+ "لشهر"+"( " +d.payment_date+")",
+                        "description": "القيمة الايجارية   "+ "لشهر"+"( " +d.payment_date+")",
                         "conversion_factor": 1,
                         "item_tax_template": frm.doc.default_tax_template,
                         "cost_center": frm.doc.cost_center ,
                         "income_account": frm.doc.income_account ,
                     },
                 ];
-    
+        let taxes = [
+                    {
+                        "doctype": "Sales Taxes and Charges",
+                        "charge_type": "On Net Total",
+                        "account_head": "2-03-01-0012 - ضريبة الجدول 1% - DMM",
+                        "description": "2-03-01-0012 - ضريبة الجدول 1% - DMM",
+                        "rate": 1,
+                       
+                    },
+                ];
         si["doctype"] = "Sales Invoice";
         si["customer"] = frm.doc.party;
         si["payment_date"] = d.payment_date;
@@ -126,8 +148,10 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
         si["posting_date"] = d.payment_date;
         si["due_date"] = d.payment_date;
         si["pms_lease_contract"] = cur_frm.doc.name;
+        si["revenue_type"] = cur_frm.doc.revenue_type;
         si["cost_center"] = cur_frm.doc.cost_center;
         si["items"] = items;
+        si["taxes"] = taxes;
         si["currency"] = "EGP";
         si["reference_doctype"] = "PMS Lease Contract";
         si["contract_repayment_schedule"] = 1;
@@ -137,6 +161,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_invoice", function(frm,cdt,c
     }
     
     });
+
     
 frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,cdn) {
     {
@@ -176,6 +201,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
         py["target_exchange_rate"] = 1;
         py["cost_center"] = cur_frm.doc.cost_center;
         py["paid_to"] = frm.doc.mode_of_payment_account;
+        py["revenue_type"] = frm.doc.revenue_type;
         py["contract_repayment_schedule"] = 1;
         py["references"] = references;
         py["payment_date"] = d.payment_date;
@@ -230,6 +256,7 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
             je["reference_doctype"] = "PMS Lease Contract";
             je["row_name"] = d.name;
             je["reference_link"] = cur_frm.doc.name;
+            je["revenue_type"] = cur_frm.doc.revenue_type;
             je["cheque_no"] = cur_frm.doc.name;
             je["bill_no"] = d.name;
             je["cost_center"] = cur_frm.doc.cost_center;
@@ -242,3 +269,5 @@ frappe.ui.form.on("PMS Repayment Schedule", "create_payment", function(frm,cdt,c
         }
       
         });
+
+    

@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-07-27 18:29:34.171812",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pms_lease_contract",
+  "customer",
+  "date",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "pms_lease_contract",
+   "fieldtype": "Link",
+   "label": "PMS Lease Contract",
+   "options": "PMS Lease Contract"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-07-27 18:29:34.171812",
+ "modified_by": "Administrator",
+ "module": "ECS PMS",
+ "name": "Invoice Tool Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

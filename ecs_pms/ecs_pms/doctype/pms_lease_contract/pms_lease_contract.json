@@ -20,6 +20,7 @@
   "cb_party",
   "posting_date",
   "is_signed",
+  "revenue_type",
   "sb_signee",
   "signee",
   "signed_on",
@@ -57,10 +58,13 @@
   "column_break_40",
   "conversion_rate",
   "accounting_details_section",
-  "revenue_type",
   "sales_percentage",
   "minimum_rent",
   "base_minimum_rent",
+  "fixed_rent1",
+  "base_fixed_rent1",
+  "promotion_rent_amount",
+  "promotion_rent_invoice",
   "rent_value_",
   "base_rent_value",
   "internal_meter_price",
@@ -247,6 +251,7 @@
    "label": "Lease Unit Details"
   },
   {
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\" ",
    "fieldname": "rent_value_",
    "fieldtype": "Currency",
    "label": "Rent Amount",
@@ -281,7 +286,6 @@
    "mandatory_depends_on": "eval:doc.with_insurance"
   },
   {
-   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
    "fieldname": "cost_center",
    "fieldtype": "Link",
    "label": "Cost Center",
@@ -297,12 +301,11 @@
    "fieldname": "contract_terms",
    "fieldtype": "Text Editor",
    "in_list_view": 1,
-   "label": "Contract Terms",
-   "reqd": 1
+   "label": "Contract Terms"
   },
   {
    "collapsible": 1,
-   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\"",
+   "depends_on": "eval:doc.revenue_type != \"Promotions\"",
    "fieldname": "repayment_schedule_section",
    "fieldtype": "Section Break",
    "label": "Repayment Schedule"
@@ -446,11 +449,12 @@
    "label": "Accounting Details"
   },
   {
+   "depends_on": "eval:doc.revenue_type != \"Promotions\"",
    "fieldname": "invoice_periodicity",
    "fieldtype": "Select",
    "label": "Invoice Periodicity",
-   "options": "\nMonthly\nQuarterly\nSemi Annually\nAnnually",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.revenue_type != \"Promotions\"",
+   "options": "\nMonthly\nQuarterly\nSemi Annually\nAnnually"
   },
   {
    "fetch_from": "unit.phase",
@@ -470,6 +474,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "conversion_rate",
    "fieldtype": "Float",
    "label": "Exchange Rate",
@@ -480,7 +485,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.currency != \"EGP\"",
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\" && doc.currency != \"EGP\"",
    "fieldname": "base_rent_value",
    "fieldtype": "Currency",
    "label": "Rent Amount (EGP)",
@@ -510,6 +515,7 @@
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.revenue_type != \"Promotions\"",
    "fieldname": "section_break_59",
    "fieldtype": "Section Break",
    "label": "Totals"
@@ -536,21 +542,21 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.revenue_type == \"Revenue Share\" || doc.revenue_type == \"Revenue Share + Minimum Rent\"",
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share\" || doc.revenue_type == \"Revenue Share / Minimum Rent\" || doc.revenue_type == \"Revenue Share + Fixed Rent\"",
    "fieldname": "sales_percentage",
    "fieldtype": "Percent",
    "label": "Sales Percentage (%)",
    "mandatory_depends_on": "eval:doc.revenue_type == \"Revenue Share\" || doc.revenue_type == \"Revenue Share + Minimum Rent\""
   },
   {
-   "depends_on": "eval:doc.revenue_type == \"Revenue Share + Minimum Rent\"",
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share / Minimum Rent\"",
    "fieldname": "minimum_rent",
    "fieldtype": "Currency",
    "label": "Minimum Rent",
    "mandatory_depends_on": "eval:doc.revenue_type == \"Revenue Share + Minimum Rent\""
   },
   {
-   "depends_on": "eval:doc.revenue_type == \"Revenue Share + Minimum Rent\"",
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share / Minimum Rent\"",
    "fieldname": "base_minimum_rent",
    "fieldtype": "Currency",
    "label": "Minimum Rent (EGP)",
@@ -572,6 +578,7 @@
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.revenue_type != \"Promotions\"",
    "fieldname": "insurance_and_advanced_payment_section",
    "fieldtype": "Section Break",
    "label": "Insurance & Advanced Payment"
@@ -596,6 +603,7 @@
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.revenue_type != \"Promotions\"",
    "fieldname": "services_and_utilities_section",
    "fieldtype": "Section Break",
    "label": "Services & Utilities"
@@ -910,6 +918,7 @@
   },
   {
    "default": "0",
+   "depends_on": "eval:doc.revenue_type == \"Fixed Lease\" ",
    "fieldname": "external_meter_price",
    "fieldtype": "Currency",
    "label": "External Meter Price"
@@ -962,6 +971,35 @@
    "label": "Income Account",
    "options": "Account",
    "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.revenue_type == \"Promotions\"",
+   "fieldname": "promotion_rent_amount",
+   "fieldtype": "Currency",
+   "label": "Rent Amount"
+  },
+  {
+   "bold": 1,
+   "depends_on": "eval:doc.revenue_type == \"Promotions\" && doc.docstatus == 1",
+   "fieldname": "promotion_rent_invoice",
+   "fieldtype": "Button",
+   "label": "Create Invoice"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share + Fixed Rent\"",
+   "fieldname": "fixed_rent1",
+   "fieldtype": "Currency",
+   "label": "Fixed Rent",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.revenue_type == \"Revenue Share + Fixed Rent\"",
+   "fieldname": "base_fixed_rent1",
+   "fieldtype": "Currency",
+   "label": "Fixed Rent (EGP)",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -980,7 +1018,7 @@
    "link_fieldname": "reference_link"
   }
  ],
- "modified": "2022-07-18 10:38:02.870211",
+ "modified": "2022-07-31 14:52:15.140062",
  "modified_by": "Administrator",
  "module": "ECS PMS",
  "name": "PMS Lease Contract",
