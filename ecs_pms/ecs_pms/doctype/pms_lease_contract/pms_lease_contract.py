@@ -816,6 +816,7 @@ class PMSLeaseContract(Document):
             self.end_date = add_days(end_date, days=(self.no_of_days - 2))
 
         minimum_rent = self.minimum_rent
+        percentage = self.sales_percentage
         fixed_value = self.minimum_rent * self.annual_increase / 100
         a = self.total_no_of_months - self.grace_period
         b = 1
@@ -894,6 +895,7 @@ class PMSLeaseContract(Document):
             self.append("contract_repayment_schedule", {
                 "payment_date": payment_date,
                 "minimum_rent": minimum_rent,
+                "sales_percentage": percentage,
                 "base_minimum_rent": minimum_rent * self.conversion_rate,
                 "marketing": monthly_marketing,
                 "base_marketing": monthly_marketing * self.conversion_rate,
@@ -910,6 +912,7 @@ class PMSLeaseContract(Document):
 
             if b >= (12 - self.grace_period) and b <= (23 - self.grace_period):
                 rent_value = x
+                percentage = self.sales_percentage
                 daily_rent = x / 30
                 daily_rent_value = daily_rent
                 marketing_value = m
@@ -921,6 +924,7 @@ class PMSLeaseContract(Document):
                 monthly_maintenance = maintenance_value
 
             if b >= (24 - self.grace_period) and b <= (35 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (2 * fixed_value)
                     minimum_rent = rent_value
@@ -952,6 +956,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (36 - self.grace_period) and b <= (47 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (3 * fixed_value)
                     minimum_rent = rent_value
@@ -983,6 +988,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (48 - self.grace_period) and b <= (59 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (4 * fixed_value)
                     minimum_rent = rent_value
@@ -1014,6 +1020,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (60 - self.grace_period) and b <= (71 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (5 * fixed_value)
                     minimum_rent = rent_value
@@ -1045,6 +1052,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (72 - self.grace_period) and b <= (83 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (6 * fixed_value)
                     minimum_rent = rent_value
@@ -1076,6 +1084,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (84 - self.grace_period) and b <= (95 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (7 * fixed_value)
                     minimum_rent = rent_value
@@ -1107,6 +1116,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (96 - self.grace_period) and b <= (107 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (8 * fixed_value)
                     minimum_rent = rent_value
@@ -1138,6 +1148,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (108 - self.grace_period) and b <= (119 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (9 * fixed_value)
                     minimum_rent = rent_value
@@ -1169,6 +1180,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (120 - self.grace_period) and b <= (131 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (10 * fixed_value)
                     minimum_rent = rent_value
@@ -1200,6 +1212,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (132 - self.grace_period) and b <= (143 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (11 * fixed_value)
                     minimum_rent = rent_value
@@ -1231,6 +1244,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (144 - self.grace_period) and b <= (155 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (12 * fixed_value)
                     minimum_rent = rent_value
@@ -1262,6 +1276,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (156 - self.grace_period) and b <= (167 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (13 * fixed_value)
                     minimum_rent = rent_value
@@ -1293,6 +1308,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (168 - self.grace_period) and b <= (179 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (14 * fixed_value)
                     minimum_rent = rent_value
@@ -1324,6 +1340,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (180 - self.grace_period) and b <= (191 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (15 * fixed_value)
                     minimum_rent = rent_value
@@ -1355,6 +1372,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (192 - self.grace_period) and b <= (203 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (16 * fixed_value)
                     minimum_rent = rent_value
@@ -1386,6 +1404,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (204 - self.grace_period) and b <= (215 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (17 * fixed_value)
                     minimum_rent = rent_value
@@ -1417,6 +1436,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (216 - self.grace_period) and b <= (227 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (18 * fixed_value)
                     minimum_rent = rent_value
@@ -1448,6 +1468,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (228 - self.grace_period) and b <= (239 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (19 * fixed_value)
                     minimum_rent = rent_value
@@ -1479,6 +1500,7 @@ class PMSLeaseContract(Document):
                     daily_maintenance = maintenance_value / 30
 
             if b >= (240 - self.grace_period) and b <= (251 - self.grace_period):
+                percentage = self.sales_percentage
                 if self.annual_increase_type == "Fixed Rate":
                     rent_value = self.minimum_rent + (20 * fixed_value)
                     minimum_rent = rent_value
@@ -1517,6 +1539,7 @@ class PMSLeaseContract(Document):
             payment_date = next_payment_date
             self.append("contract_repayment_schedule", {
                 "payment_date": payment_date,
+                "sales_percentage": percentage,
                 "minimum_rent": daily_rent_value * self.no_of_days,
                 "base_minimum_rent": (daily_rent_value * self.no_of_days) * self.conversion_rate,
                 "marketing": daily_marketing * self.no_of_days,
@@ -1527,7 +1550,9 @@ class PMSLeaseContract(Document):
                 "base_electricity": (self.base_electricity_amount / 30) * self.no_of_days
             })
         total = 0
+
         for d in self.contract_repayment_schedule:
+            d.revenue_share = 0
             if d.minimum_rent > d.revenue_share:
                 d.monthly_payment = d.minimum_rent
             if d.minimum_rent < d.revenue_share:
